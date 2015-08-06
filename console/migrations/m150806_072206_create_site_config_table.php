@@ -3,8 +3,9 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m150805_125200_create_deal_categories_table extends Migration
+class m150806_072206_create_site_config_table extends Migration
 {
+    //this will contain config keys for platforms like twitter, facebook and all those, incase we need add the
     public function up()
     {
         $tableOptions = null;
@@ -12,23 +13,23 @@ class m150805_125200_create_deal_categories_table extends Migration
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('{{%category}}', [
+        $this->createTable('{{%site_config}}',[
             'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING.' NOT NULL',
-            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
-            'source' => Schema::TYPE_SMALLINT,
+            'fb_consumer' => Schema::TYPE_STRING,
+            'fb_secret' => Schema::TYPE_STRING,
+            'twitter_consumer'=>Schema::TYPE_STRING,
+            'twitter_secret' => Schema::TYPE_STRING,
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'created_by' => Schema::TYPE_INTEGER.'(11)',
             'updated_by' => Schema::TYPE_INTEGER. '(11)',
-
-        ], $tableOptions);
+        ],$tableOptions);
 
     }
 
     public function down()
     {
-        echo "m150805_125200_create_deal_categories_table cannot be reverted.\n";
+        echo "m150806_072206_create_site_config_table cannot be reverted.\n";
 
         return false;
     }

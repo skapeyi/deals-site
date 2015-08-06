@@ -4,8 +4,101 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b76f255130cd7f5b04162c641a7418b",
+    "hash": "8c8836458899c512674c4cdb059de4bf",
     "packages": [
+        {
+            "name": "bower-asset/angular",
+            "version": "v1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "dbd689e8103a6366e53e1f6786727f7c65ccfd75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/dbd689e8103a6366e53e1f6786727f7c65ccfd75",
+                "reference": "dbd689e8103a6366e53e1f6786727f7c65ccfd75",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular.js",
+                "bower-asset-ignore": []
+            }
+        },
+        {
+            "name": "bower-asset/angular-route",
+            "version": "v1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular-route.git",
+                "reference": "6d34da91a291260d1826c42f163ac21d094cc0fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular-route/zipball/6d34da91a291260d1826c42f163ac21d094cc0fc",
+                "reference": "6d34da91a291260d1826c42f163ac21d094cc0fc",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "1.4.3"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular-route.js",
+                "bower-asset-ignore": []
+            }
+        },
+        {
+            "name": "bower-asset/angular-strap",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mgcrea/angular-strap.git",
+                "reference": "9195cabe8a9faf0a526953cb6a67614747d575b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mgcrea/angular-strap/zipball/9195cabe8a9faf0a526953cb6a67614747d575b7",
+                "reference": "9195cabe8a9faf0a526953cb6a67614747d575b7",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.2.21,<2.0.0"
+            },
+            "require-dev": {
+                "bower-asset/angular-animate": "~1.4",
+                "bower-asset/angular-i18n": "~1.4",
+                "bower-asset/angular-mocks": "~1.4",
+                "bower-asset/angular-motion": ">=0.3.3,<0.4.0",
+                "bower-asset/angular-route": "~1.4",
+                "bower-asset/angular-sanitize": "~1.4",
+                "bower-asset/angular-scenario": "~1.4",
+                "bower-asset/bootstrap": ">=3.2.0,<4.0.0",
+                "bower-asset/bootstrap-additions": ">=0.2.3,<0.3.0",
+                "bower-asset/fastclick": ">=1.0.3,<2.0.0",
+                "bower-asset/font-awesome": ">=4.1.0,<5.0.0",
+                "bower-asset/highlightjs": ">=8.0.0,<9.0.0",
+                "bower-asset/jquery": ">=2.1.1,<3.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/angular-strap.js",
+                    "dist/angular-strap.tpl.js"
+                ],
+                "bower-asset-ignore": [
+                    "docs",
+                    "test",
+                    "CONTRIBUTING.md"
+                ]
+            },
+            "description": "AngularStrap - AngularJS directives for Bootstrap",
+            "keywords": [
+                "angular",
+                "bootstrap"
+            ]
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
@@ -371,16 +464,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727"
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
-                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +548,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-07-11 02:37:59"
+            "time": "2015-08-05 22:00:30"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
