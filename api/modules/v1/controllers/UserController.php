@@ -224,5 +224,9 @@ class UserController extends ApiController{
         }
     }
 
+    public function actionUpdatepreferences(){
+
+    }
+
 
 }

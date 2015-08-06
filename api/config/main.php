@@ -57,6 +57,7 @@ return [
                         'POST resetpassword' => 'resetpassword',
                         'POST history' => 'history',
                         'POST update'  => 'update',
+                        'POST updatepreferences'  => '',
 
                         //inbuilt patterns, don't change this.
                         'PUT,PATCH {id}' => 'update',
