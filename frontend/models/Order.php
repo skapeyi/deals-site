@@ -5,30 +5,33 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "user_location".
+ * This is the model class for table "order".
  *
  * @property integer $id
+ * @property string $code
+ * @property integer $deal_id
  * @property integer $user_id
- * @property string $location_x
- * @property string $location_y
+ * @property integer $type
+ * @property integer $redeem_status
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $created_by
  * @property integer $updated_by
  *
+ * @property Deal $deal
  * @property User $user
  * @property User $createdBy
  * @property User $updatedBy
  */
-class UserLocation extends \yii\db\ActiveRecord
+class Order extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'user_location';
+        return 'order';
     }
 
     /**
@@ -37,9 +40,9 @@ class UserLocation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['location_x', 'location_y'], 'number'],
-            [['created_at', 'updated_at'], 'required']
+            [['deal_id', 'user_id', 'type', 'redeem_status', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at'], 'required'],
+            [['code'], 'string', 'max' => 32]
         ];
     }
 
@@ -50,15 +53,25 @@ class UserLocation extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'code' => 'Code',
+            'deal_id' => 'Deal ID',
             'user_id' => 'User ID',
-            'location_x' => 'Location X',
-            'location_y' => 'Location Y',
+            'type' => 'Type',
+            'redeem_status' => 'Redeem Status',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeal()
+    {
+        return $this->hasOne(Deal::className(), ['id' => 'deal_id']);
     }
 
     /**
