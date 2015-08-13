@@ -50,6 +50,9 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/user',
+                        'vl/deal',
+                        'v1,category',
+                        ''
                     ],
                     'patterns' => [
                         //okay... if you want to a add any new pattern, add them before the inbuilt patterns.
