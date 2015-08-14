@@ -5,6 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+use kartik\sidenav\SideNav;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -21,6 +22,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
     <?php $this->beginBody() ?>
     <div class="wrap">
@@ -46,6 +48,7 @@ AppAsset::register($this);
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
+
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
@@ -59,13 +62,60 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <!--Create a row and a sidebar here -->
+            <div  class="row">
+                <div class="col-md-4">
+                    <?php echo SideNav::widget([
+                        'type' => SideNav::TYPE_DEFAULT,
+                        'heading' => 'My Account',
+                        'items' => [
+                            [
+                                'url' => ['user/dashboard'],
+                                'label' => 'Dashboard',
+                                'icon' => 'home'
+                            ],
+                            [
+                                'url' => ['user/voucher'],
+                                'label' => 'My Vouchers',
+                                'icon' => 'tags'
+                            ],
+                            [
+                                'url' => ['user/credit'],
+                                'label' => 'Credits',
+                                'icon' => 'gift'
+                            ],
+                            [
+                                'url' => ['user/password'],
+                                'label' => 'Change Password',
+                                'icon' => 'lock'
+                            ],
+                            [
+                                'url' => ['user/preference'],
+                                'label' => 'Update Preference',
+                                'icon' => 'home'
+                            ],
+                            [
+                                'url' => ['user/location'],
+                                'label' => 'Add Your Location',
+                                'icon' => 'map-marker'
+                            ],
+
+                        ],
+                    ]); ?>
+
+                </div>
+                <div class="col-md-8">
+                    <?= $content ?>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; DoneDeal <?= date('Y') ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>

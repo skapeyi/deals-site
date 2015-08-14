@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\ChangePassword;
 use Yii;
 use frontend\models\User;
 use frontend\models\search\UserSearch;
@@ -118,4 +119,164 @@ class UserController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public  function actionCredit()
+    {
+        $this->layout = "account";
+        return $this->render('credit',[
+
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     * This method helps reset the password.
+     * The validation is handled in the ChangePassword model.
+     * The rest of the logic is implemented here!
+     */
+    public  function actionPassword()
+    {
+        $model = new ChangePassword();
+        $this->layout = "account";
+
+        if(!Yii::$app->user->isGuest)
+        {
+            if ($model->load(Yii::$app->request->post())) {
+
+                if ($model->validate())
+                {
+                    $params = Yii::$app->request->post('ChangePassword');
+                    $user = new User();
+                    $current_user = $user::findOne(['id' => Yii::$app->getUser()->id ]);
+
+                    if($current_user == null)
+                    {
+                        Yii::$app->getSession()->setFlash(
+                            'error','Something went wrong while processing your request, please login and try again'
+                        );
+
+                        $this->redirect(['site/login']);
+
+                    }
+                    else
+                    {
+                        if(Yii::$app->getSecurity()->validatePassword($params['old_password'], $current_user->password_hash))
+                        {
+                            $current_user->password_hash = Yii::$app->security->generatePasswordHash($params['new_password']);
+                            if($current_user->save()){
+                                Yii::$app->getSession()->setFlash(
+                                    'success','Password successfully changed'
+                                );
+                            }
+
+                        }
+                        else
+                        {
+                            Yii::$app->getSession()->setFlash(
+                                'error','Incorrect old password, please try again'
+                            );
+                        }
+
+                    }
+
+                }
+            }
+
+            return $this->render('password',[
+                'model' => $model,
+            ]);
+        }
+        else
+        {
+            Yii::$app->getSession()->setFlash(
+                'error','Please login to continue'
+            );
+           //redirect to home page
+            $this->redirect(array('site/login'));
+        }
+    }
+
+    public  function actionPreference()
+    {
+
+        $model = new User();
+        $current_user = $model->findOne(['id' => Yii::$app->user->getId()]);
+        $this->layout = "account";
+
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+
+            if($current_user->validate())
+            {
+                $params = Yii::$app->request->post('User');
+                $current_user->firstname = $params['firstname'];
+                $current_user->lastname = $params['lastname'];
+                $current_user->sms_notification = $params['sms_notification'];
+                $current_user->email_notifications = $params['email_notifications'];
+                $current_user->news_letter = $params['news_letter'];
+                $current_user->new_deal = $params['new_deal'];
+                $current_user->deal_failed = $params['deal_failed'];
+                $current_user->deal_purchase = $params['voucher_activated'];
+                $current_user->home_address = $params['home_address'];
+                $current_user->home_address_1 = $params['home_address_1'];
+                $current_user->city = $params['city'];
+                $current_user->dob = $params['dob'];
+
+
+                if($current_user->save())
+                {
+                   Yii::$app->getSession()->setFlash('success','Profile successfully updated');
+                }
+                else
+                {
+                   Yii::$app->getSession()->setFlash('error','Something went wrong while processing your request, please try again');
+
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+        return $this->render('preferences',[
+            'model' => $current_user
+
+        ]);
+    }
+
+    /**
+     * Get all vouchers a user has used from before!
+     * Also allow for downloading, exporting sharing.     *
+     */
+    public  function actionVoucher()
+    {
+        $this->layout = "account";
+        return $this->render('vouchers',[
+
+        ]);
+    }
+
+    public  function actionLocation()
+    {
+        $this->layout = "account";
+        return $this->render('location',[
+
+        ]);
+    }
+
+    public  function actionDashboard()
+    {
+        $this->layout = "account";
+        return $this->render('dashboard',[
+
+        ]);
+    }
+
 }

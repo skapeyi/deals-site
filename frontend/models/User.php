@@ -49,7 +49,7 @@ use Yii;
  * @property UserLocation[] $userLocations0
  * @property UserLocation[] $userLocations1
  */
-class User extends \yii\db\ActiveRecord
+class User extends DoneDealModel
 {
     /**
      * @inheritdoc
@@ -82,30 +82,30 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
+            'username' => 'User Name',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
+            'firstname' => 'First Name',
+            'lastname' => 'Last Name',
             'avatar_url' => 'Avatar Url',
             'url' => 'Url',
             'password_reset_token' => 'Password Reset Token',
-            'phone' => 'Phone',
+            'phone' => 'Phon',
             'email' => 'Email',
             'merchant' => 'Merchant',
             'last_login' => 'Last Login',
-            'email_notifications' => 'Email Notifications',
-            'sms_notification' => 'Sms Notification',
-            'news_letter' => 'News Letter',
-            'new_deal' => 'New Deal',
-            'deal_failed' => 'Deal Failed',
-            'deal_purchase' => 'Deal Purchase',
-            'voucher_activated' => 'Voucher Activated',
+            'email_notifications' => 'Get Email Notifications',
+            'sms_notification' => 'Get SMS Notification',
+            'news_letter' => 'Would you like to get a NewsLetter',
+            'new_deal' => 'Get Notified When New Deals Are Available',
+            'deal_failed' => 'Get Notified When Deal Purchase Fails',
+            'deal_purchase' => 'Get Notifications Everytime You Buy A Deal',
+            'voucher_activated' => 'Get Notified When Your Vouchers Activated',
             'home_address' => 'Home Address',
             'home_address_1' => 'Home Address 1',
             'country' => 'Country',
-            'city' => 'City',
-            'dob' => 'Dob',
+            'city' => 'Your City',
+            'dob' => 'Date Of Birth',
             'status' => 'Status',
             'source' => 'Source',
             'created_at' => 'Created At',
