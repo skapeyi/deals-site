@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = "DoneDeal | Account details";
+$this->title = "DoneDeal | Administrator";
 $this->params['breadcrumbs'][] = 'Account Settings';
 ?>
 
