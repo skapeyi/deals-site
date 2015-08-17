@@ -95,7 +95,7 @@ class User extends DoneDealModel
             'merchant' => 'Merchant',
             'last_login' => 'Last Login',
             'email_notifications' => 'Get Email Notifications',
-            'sms_notification' => 'Get SMS Notification',
+            'sms_notification' => 'Get SMS Notification klsjakljfdlkjafsdljf',
             'news_letter' => 'Would you like to get a NewsLetter',
             'new_deal' => 'Get Notified When New Deals Are Available',
             'deal_failed' => 'Get Notified When Deal Purchase Fails',
@@ -194,5 +194,10 @@ class User extends DoneDealModel
     public static function find()
     {
         return new UserQuery(get_called_class());
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 }

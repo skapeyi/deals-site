@@ -76,7 +76,7 @@ AppAsset::register($this);
                             ],
                             [
                                 'url' => "#",
-                                'label' => 'Deals',
+                                'label' => 'Adminstrator',
                                 'icon' => 'cloud',
                                 'items'=>[
                                     ['label' => "Add Deal", 'icon' => 'plus', 'url' =>''],

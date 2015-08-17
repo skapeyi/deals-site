@@ -29,7 +29,7 @@ AppAsset::register($this);
                 'brandLabel' => 'DoneDeal',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-default navbar-fixed-top',
+                    'class' => 'navbar-default navbar-fixed-top donedeal-nav',
                 ],
             ]);
             $menuItems = [

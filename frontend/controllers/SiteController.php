@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\User;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -12,6 +13,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\authclient\OAuth2;
+
 
 /**
  * Site controller
@@ -61,6 +64,10 @@ class SiteController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'oAuthSuccess'],
             ],
         ];
     }
@@ -167,6 +174,58 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * This function will be triggered when user is successfuly authenticated using some oAuth client.
+     *
+     *
+     */
+    public function oAuthSuccess($client) {
+        // get user data from client
+        $userAttributes = $client->getUserAttributes();
+
+        // we get the email sent back and check if the email is in the db we have, and if we don't we create a new account
+        //else, we log the user in
+
+        $model = new User();
+        $current_user = $model::findOne(['email' => $userAttributes["email"]]);
+        if($current_user != null)
+        {
+            Yii::$app->getSession()->setFlash(
+                'success','You have been logged in as '.$userAttributes["name"]
+            );
+            //log the user in
+            return Yii::$app->user->login($this->current_user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+
+        }
+        else
+        {
+            //create a new user
+            $new_user = new User();
+            $new_user->firstname = $userAttributes["first_name"];
+            $new_user->lastname = $userAttributes["last_name"];
+            $new_user->email = $userAttributes["email"];
+            $new_user->password_hash = Yii::$app->security->generatePasswordHash($userAttributes["name"]);
+            $new_user->generateAuthKey();
+            $new_user->created_by = 1;
+            $new_user->updated_by = 1;
+            if($new_user->save()){
+                Yii::$app->getSession()->setFlash(
+                    'success','We have created an account for you.'
+                );
+
+            }
+            else{
+                Yii::$app->getSession()->setFlash(
+                    'error',$userAttributes["name"].' We failed to create an account for you, but we received your data'
+                );
+            }
+
+        }
+        Yii::info($userAttributes, 'debug');
+        Yii::info($new_user->errors, 'debug');
+        //return $this->render()
     }
 
 

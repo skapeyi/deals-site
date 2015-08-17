@@ -5,3 +5,12 @@
 .justified{
     text-align: justify;
 }
+
+.navbar-default.navbar{
+    color: #fff;
+    background-color: #663366;
+}
+
+a, a:hover, a:focus {
+    color: #663366;
+}
