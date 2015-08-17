@@ -9,6 +9,9 @@ $this->params['breadcrumbs'][] = 'Account Settings';
         <h3 class="panel-title">My Places</h3>
     </div>
     <div class="panel-body">
-        Panel content
+        <div class="jumbotron">
+            <h1>User locations </h1>
+            <p>Under Development Soon!!!! </p>
+        </div>
     </div>
 </div>
