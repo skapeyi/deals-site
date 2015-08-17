@@ -279,7 +279,7 @@ class UserController extends Controller
         ]);
     }
     public function actionAdmin(){
-        $this->layout = 'admin';
+        $this->layout = 'account';
         return $this->render('admin');
     }
 
