@@ -1,8 +1,8 @@
 {
     "name": "yiisoft/yii2-app-advanced",
     "description": "Yii 2 Advanced Project Template",
-    "keywords": ["yii2", "framework", "advanced", "project template"],
-    "homepage": "http://www.yiiframework.com/",
+    "keywords": ["Deals", "Kampala", "Restaurants", "Food", "Beauty and Spa"],
+    "homepage": "http://donedeal.ug/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {

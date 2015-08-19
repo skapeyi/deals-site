@@ -18,6 +18,10 @@ How To Set Up
 6. To set up an api endpoint, create a sub-domain e.g ```api.domain.com``` then set its document root to ```api/web```
 then refer to the API documentation on which calls are available for you
 
+Change Log
+-----------------
+
+
 DIRECTORY STRUCTURE
 -------------------
 

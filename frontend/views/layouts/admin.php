@@ -129,7 +129,7 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; DoneDeal <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">The Best Deals In Town</p>
         </div>
     </footer>
 
