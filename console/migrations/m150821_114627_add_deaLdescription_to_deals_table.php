@@ -15,10 +15,10 @@ class m150821_114627_add_deaLdescription_to_deals_table extends Migration
 
 
         //add a deal categories joint table
-        $this->createTable('{{%deal_caegory}}',[
+        $this->createTable('{{%deal_category}}',[
             'id' => Schema::TYPE_PK,
-            'deal_id' => Schema::TYPE_INTEGER.(11),
-            'category_id' => Schema::TYPE_INTEGER.(11),
+            'deal_id' => Schema::TYPE_INTEGER.'(11)',
+            'category_id' => Schema::TYPE_INTEGER.'(11)',
             'status' => Schema::TYPE_SMALLINT,
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER,

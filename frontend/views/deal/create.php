@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-content">
                 <div class="card-body">
                     <h3><strong>Categories</strong></h3>
-                    <?= $form->field($model, 'status')->widget(CheckboxX::classname(), []);?>
+                    <?=  $form->field($model, 'status')->checkboxList($model->deal_categories, ['unselect'=>NULL]);?>
 
                 </div>
             </div>

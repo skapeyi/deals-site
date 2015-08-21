@@ -18,8 +18,8 @@ class m150805_153245_create_voucher_table extends Migration
             'code' => Schema::TYPE_STRING.'(32)',
             'deal_id' => Schema::TYPE_INTEGER.'(11)',
             'user_id' => Schema::TYPE_INTEGER.'(11)',
-            'type' => Schema::TYPE_BOOLEAN.'DEFAULT 0',//diff between admin generated vouchers(for events) and the rest
-            'redeem_status' => Schema::TYPE_BOOLEAN.'DEFAULT 0',
+            'type' => Schema::TYPE_BOOLEAN.' DEFAULT 0',//diff between admin generated vouchers(for events) and the rest
+            'redeem_status' => Schema::TYPE_BOOLEAN.' DEFAULT 0',
             'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',

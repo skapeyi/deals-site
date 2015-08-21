@@ -94,4 +94,7 @@ class Deal extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Order::className(), ['deal_id' => 'id']);
     }
+
+    ///holds all the available categories so one can select multiple categories for a deal
+    public $deal_categories;
 }

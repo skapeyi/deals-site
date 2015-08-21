@@ -8,6 +8,7 @@ use frontend\models\search\DealSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\models\Category;
 
 /**
  * DealController implements the CRUD actions for Deal model.
@@ -61,7 +62,15 @@ class DealController extends Controller
     public function actionCreate()
     {
         $this->layout = "admin";
+
+        //get all categories to generate the check boxes for the categories
+
+
+
         $model = new Deal();
+        $all_categories = Category::find()->all();
+        $model->deal_categories = \yii\helpers\ArrayHelper::map($all_categories, 'id', 'name');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

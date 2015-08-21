@@ -71,7 +71,8 @@ class User extends DoneDealModel
             [['username', 'password_hash', 'password_reset_token', 'email', 'home_address', 'home_address_1', 'country', 'city'], 'string', 'max' => 255],
             [['auth_key', 'firstname', 'lastname'], 'string', 'max' => 32],
             [['avatar_url', 'url'], 'string', 'max' => 64],
-            [['phone'], 'string', 'max' => 12]
+            [['phone'], 'string', 'max' => 12],
+            [['phone', 'email', 'username'], 'unique'],
         ];
     }
 
