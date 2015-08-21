@@ -80,6 +80,7 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = "admin";
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -122,7 +123,7 @@ class UserController extends Controller
 
     public  function actionCredit()
     {
-        $this->layout = "account";
+        $this->layout = "admin";
         return $this->render('credit',[
 
         ]);
@@ -139,7 +140,7 @@ class UserController extends Controller
     public  function actionPassword()
     {
         $model = new ChangePassword();
-        $this->layout = "account";
+        $this->layout = "admin";
 
         if(!Yii::$app->user->isGuest)
         {
@@ -203,7 +204,7 @@ class UserController extends Controller
 
         $model = new User();
         $current_user = $model->findOne(['id' => Yii::$app->user->getId()]);
-        $this->layout = "account";
+        $this->layout = "admin";
 
         if ($model->load(Yii::$app->request->post()))
         {
@@ -257,7 +258,7 @@ class UserController extends Controller
      */
     public  function actionVoucher()
     {
-        $this->layout = "account";
+        $this->layout = "admin";
         return $this->render('vouchers',[
 
         ]);
@@ -265,7 +266,7 @@ class UserController extends Controller
 
     public  function actionLocation()
     {
-        $this->layout = "account";
+        $this->layout = "admin";
         return $this->render('location',[
 
         ]);
@@ -273,13 +274,13 @@ class UserController extends Controller
 
     public  function actionDashboard()
     {
-        $this->layout = "account";
+        $this->layout = "admin";
         return $this->render('dashboard',[
 
         ]);
     }
     public function actionAdmin(){
-        $this->layout = 'account';
+        $this->layout = 'admin';
         return $this->render('admin');
     }
 

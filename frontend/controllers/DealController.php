@@ -60,6 +60,7 @@ class DealController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = "admin";
         $model = new Deal();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,6 +80,7 @@ class DealController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = "admin";
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,6 +100,7 @@ class DealController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->layout = "admin";
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

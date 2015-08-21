@@ -14,6 +14,7 @@ How To Set Up
 2. Run ```init```
 3. Edit ```common/config/main-local.php``` and add the db name
 4. Run ```yii migrate``` to run the migrations and set up the database
+5. Run `yii migrate --migrationPath=@yii/rbac/migrations` to set up the role management tables(RBAC)
 5. Set the document root to point to ```frontend/web``` and you are good to start using the web app.
 6. To set up an api endpoint, create a sub-domain e.g ```api.domain.com``` then set its document root to ```api/web```
 then refer to the API documentation on which calls are available for you

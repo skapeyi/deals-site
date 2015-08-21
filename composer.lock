@@ -4,20 +4,80 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c053fa1a060bff37dae303a7d1c08066",
+    "hash": "3201d50849f10a685d91b698f55fe15f",
     "packages": [
         {
-            "name": "bower-asset/angular",
-            "version": "v1.4.3",
+            "name": "2amigos/yii2-tinymce-widget",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/angular/bower-angular.git",
-                "reference": "dbd689e8103a6366e53e1f6786727f7c65ccfd75"
+                "url": "https://github.com/2amigos/yii2-tinymce-widget.git",
+                "reference": "d58bad3ede450f86acd475fb4ecda982b980132b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular/zipball/dbd689e8103a6366e53e1f6786727f7c65ccfd75",
-                "reference": "dbd689e8103a6366e53e1f6786727f7c65ccfd75",
+                "url": "https://api.github.com/repos/2amigos/yii2-tinymce-widget/zipball/d58bad3ede450f86acd475fb4ecda982b980132b",
+                "reference": "d58bad3ede450f86acd475fb4ecda982b980132b",
+                "shasum": ""
+            },
+            "require": {
+                "tinymce/tinymce": ">=4",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\tinymce\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TinyMCE widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/tinymce-widget",
+            "keywords": [
+                "2amigos",
+                "extension",
+                "tinymce",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-03-28 21:53:43"
+        },
+        {
+            "name": "bower-asset/angular",
+            "version": "v1.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "f00cff5525db7c853f42854079a31936d400f99b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/f00cff5525db7c853f42854079a31936d400f99b",
+                "reference": "f00cff5525db7c853f42854079a31936d400f99b",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -28,20 +88,20 @@
         },
         {
             "name": "bower-asset/angular-route",
-            "version": "v1.4.3",
+            "version": "v1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/angular/bower-angular-route.git",
-                "reference": "6d34da91a291260d1826c42f163ac21d094cc0fc"
+                "reference": "253b707a425ede44798caca0031293f33b291808"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular-route/zipball/6d34da91a291260d1826c42f163ac21d094cc0fc",
-                "reference": "6d34da91a291260d1826c42f163ac21d094cc0fc",
+                "url": "https://api.github.com/repos/angular/bower-angular-route/zipball/253b707a425ede44798caca0031293f33b291808",
+                "reference": "253b707a425ede44798caca0031293f33b291808",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/angular": "1.4.3"
+                "bower-asset/angular": "1.4.4"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -470,6 +530,50 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "kartik-v/bootstrap-checkbox-x",
+            "version": "v1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-checkbox-x.git",
+                "reference": "97c64891764e580cb25b6983dbc068758dc4a962"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-checkbox-x/zipball/97c64891764e580cb25b6983dbc068758dc4a962",
+                "reference": "97c64891764e580cb25b6983dbc068758dc4a962",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\checkbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An extended checkbox plugin for bootstrap with three states and additional styles.",
+            "homepage": "https://github.com/kartik-v/bootstrap-checkbox-x",
+            "keywords": [
+                "bootstrap",
+                "checkbox",
+                "indeterminate",
+                "jquery",
+                "null",
+                "state",
+                "three"
+            ],
+            "time": "2015-06-18 14:47:14"
+        },
+        {
             "name": "kartik-v/bootstrap-fileinput",
             "version": "v4.2.5",
             "source": {
@@ -599,6 +703,54 @@
                 "select"
             ],
             "time": "2015-07-14 09:54:25"
+        },
+        {
+            "name": "kartik-v/yii2-checkbox-x",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-checkbox-x.git",
+                "reference": "c7c6e64ad4dcdd73840e124efa85eddbc983f991"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-checkbox-x/zipball/c7c6e64ad4dcdd73840e124efa85eddbc983f991",
+                "reference": "c7c6e64ad4dcdd73840e124efa85eddbc983f991",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/bootstrap-checkbox-x": "~1.5",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\checkbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Extended checkbox widget for bootstrap with three states and additional styles.",
+            "homepage": "https://github.com/kartik-v/yii2-checkbox-x",
+            "keywords": [
+                "bootstrap",
+                "checkbox",
+                "indeterminate",
+                "jquery",
+                "null",
+                "state",
+                "three"
+            ],
+            "time": "2015-06-18 18:51:29"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -1690,6 +1842,52 @@
             "time": "2015-06-06 14:19:39"
         },
         {
+            "name": "tinymce/tinymce",
+            "version": "4.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "aafc1144b1561d6c8485f81f9d63495b5db575c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/aafc1144b1561d6c8485f81f9d63495b5db575c8",
+                "reference": "aafc1144b1561d6c8485f81f9d63495b5db575c8",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "skins/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "http://www.tinymce.com",
+            "keywords": [
+                "editor",
+                "html",
+                "javascript",
+                "richtext",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2015-08-17 08:22:32"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "2.0.6",
             "source": {
@@ -2134,16 +2332,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97"
+                "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
-                "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/1b302e67521d46feb2413d9d96ca94ed82b39b0e",
+                "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e",
                 "shasum": ""
             },
             "require": {
@@ -2177,7 +2375,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2015-05-10 22:08:56"
+            "time": "2015-08-06 16:14:06"
         },
         {
             "name": "yiisoft/yii2-faker",

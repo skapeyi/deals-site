@@ -64,7 +64,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <!--Create a row and a sidebar here -->
             <div  class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo SideNav::widget([
                         'type' => SideNav::TYPE_DEFAULT,
                         'heading' => 'My Account',
@@ -79,7 +79,7 @@ AppAsset::register($this);
                                 'label' => 'Adminstrator',
                                 'icon' => 'cloud',
                                 'items'=>[
-                                    ['label' => "Add Deal", 'icon' => 'plus', 'url' =>''],
+                                    ['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
                                     ['label' => "All Deals", 'icon' => 'eye-open', 'url' =>''],
                                     ['label' => "Manage Users", 'icon' => 'wrench', 'url' =>''],
                                     ['label' => "All Vouchers", 'icon' => 'gift', 'url' =>''],
@@ -117,7 +117,7 @@ AppAsset::register($this);
                     ]); ?>
 
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <?= $content ?>
                 </div>
             </div>

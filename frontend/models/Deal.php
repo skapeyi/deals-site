@@ -63,7 +63,7 @@ class Deal extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Deal Name',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'value' => 'Value',
@@ -73,7 +73,7 @@ class Deal extends \yii\db\ActiveRecord
             'quantity' => 'Quantity',
             'purchased' => 'Purchased',
             'fake_purchased' => 'Fake Purchased',
-            'img_url' => 'Img Url',
+            'img_url' => 'Deal Image',
             'voucher_img_url' => 'Voucher Img Url',
             'publish_status' => 'Publish Status',
             'seo_description' => 'Seo Description',
