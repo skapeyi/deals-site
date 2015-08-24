@@ -81,7 +81,7 @@ AppAsset::register($this);
                                 'items'=>[
                                     ['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
                                     ['label' => "All Deals", 'icon' => 'eye-open', 'url' =>''],
-                                    ['label' => "Manage Users", 'icon' => 'wrench', 'url' =>''],
+                                    ['label' => "Manage Users", 'icon' => 'wrench', 'url' => ['admin/index']],
                                     ['label' => "All Vouchers", 'icon' => 'gift', 'url' =>''],
                                     ['label' => "Reports", 'icon' => 'globe', 'url' =>''],
                                 ]

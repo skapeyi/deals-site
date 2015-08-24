@@ -13,6 +13,7 @@ use Yii;
  * @property string $end_date
  * @property integer $value
  * @property string $highlight
+ * @property string $details
  * @property integer $discount
  * @property integer $merchant
  * @property integer $quantity
@@ -51,7 +52,7 @@ class Deal extends DoneDealModel
             [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity', 'created_at', 'updated_at'], 'required'],
             [['start_date', 'end_date'], 'safe'],
             [['value', 'discount', 'merchant', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['highlight'], 'string'],
+            [['highlight','details'], 'string'],
             [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255]
         ];
     }
@@ -70,7 +71,7 @@ class Deal extends DoneDealModel
             'highlight' => 'Highlight',
             'discount' => 'Discount',
             'merchant' => 'Merchant',
-            'quantity' => 'Quantity',
+            'quantity' => 'Number of Deal Available',
             'purchased' => 'Purchased',
             'fake_purchased' => 'Fake Purchased',
             'img_url' => 'Deal Image',
@@ -79,6 +80,7 @@ class Deal extends DoneDealModel
             'seo_description' => 'Seo Description',
             'seo_keywords' => 'Seo Keywords',
             'status' => 'Status',
+            'details' => 'Deal Information',
             'source' => 'Source',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
