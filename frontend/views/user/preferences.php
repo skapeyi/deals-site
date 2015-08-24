@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = 'Account Settings';
     <div class="panel-body">
         <div class="col-md-6">
             <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($model, 'username') ?>
             <?= $form->field($model,'firstname') ?>
             <?= $form->field($model,'lastname') ?>
             <?= $form->field($model,'home_address') ?>

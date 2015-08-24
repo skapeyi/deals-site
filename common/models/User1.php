@@ -54,7 +54,7 @@ use yii\web\IdentityInterface;
  * @property UserLocation[] $userLocations0
  * @property UserLocation[] $userLocations1
  */
-class User extends DoneDealModel implements IdentityInterface
+class User1 extends DoneDealModel implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;

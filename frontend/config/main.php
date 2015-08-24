@@ -47,11 +47,11 @@ return [
                     'clientId' => '370013373167358',
                     'clientSecret' => '89d61c5fc8334d8c0d77a66a928a11f8',
                 ],
-                'twitter' => [
-                    'class' => 'yii\authclient\clients\Twitter',
-                    'consumerKey' => 'twitter_consumer_key',
-                    'consumerSecret' => 'twitter_consumer_secret',
-                ],
+//                'twitter' => [
+//                    'class' => 'yii\authclient\clients\Twitter',
+//                    'consumerKey' => 'twitter_consumer_key',
+//                    'consumerSecret' => 'twitter_consumer_secret',
+//                ],
             ],
         ],
     ],

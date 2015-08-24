@@ -10,7 +10,7 @@ use Yii;
  */
 class SignupForm extends Model
 {
-    public $username;
+    public $phone;
     public $email;
     public $password;
 
@@ -20,10 +20,10 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['phone', 'filter', 'filter' => 'trim'],
+            ['phone', 'required'],
+            ['phone', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This phone number has already been used.'],
+            ['phone', 'string', 'min' =>10, 'max' => 12],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
@@ -44,7 +44,7 @@ class SignupForm extends Model
     {
         if ($this->validate()) {
             $user = new User();
-            $user->username = $this->username;
+            $user->phone = $this->phone;
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();

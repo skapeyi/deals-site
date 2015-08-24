@@ -32,7 +32,7 @@ use Yii;
  *
  * @property Order[] $orders
  */
-class Deal extends \yii\db\ActiveRecord
+class Deal extends DoneDealModel
 {
     /**
      * @inheritdoc
@@ -95,6 +95,6 @@ class Deal extends \yii\db\ActiveRecord
         return $this->hasMany(Order::className(), ['deal_id' => 'id']);
     }
 
-    ///holds all the available categories so one can select multiple categories for a deal
+    //holds all the available categories so one can select multiple categories for a deal, used in
     public $deal_categories;
 }

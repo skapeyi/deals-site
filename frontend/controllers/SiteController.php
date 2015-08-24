@@ -1,7 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\models\User;
+use common\models\User1;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -177,7 +177,7 @@ class SiteController extends Controller
     }
 
     /**
-     * This function will be triggered when user is successfuly authenticated using some oAuth client.
+     * This function will be triggered when user is successfully authenticated using some oAuth client.
      *
      *
      */
@@ -188,32 +188,41 @@ class SiteController extends Controller
         // we get the email sent back and check if the email is in the db we have, and if we don't we create a new account
         //else, we log the user in
 
-        $model = new User();
+        $model = new User1();
         $current_user = $model::findOne(['email' => $userAttributes["email"]]);
         if($current_user != null)
         {
             Yii::$app->getSession()->setFlash(
-                'success','You have been logged in as '.$userAttributes["name"]
+                'success','You have been logged in as '.$userAttributes["email"]
             );
             //log the user in
-            return Yii::$app->user->login($this->current_user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+            return Yii::$app->user->login($current_user, 3600 * 24 * 30 );
 
         }
         else
         {
             //create a new user
-            $new_user = new User();
+            $new_user = new User1();
             $new_user->firstname = $userAttributes["first_name"];
             $new_user->lastname = $userAttributes["last_name"];
             $new_user->email = $userAttributes["email"];
-            $new_user->password_hash = Yii::$app->security->generatePasswordHash($userAttributes["name"]);
+            $new_user->password_hash = Yii::$app->security->generatePasswordHash($userAttributes["email"]);
             $new_user->generateAuthKey();
-            $new_user->created_by = 1;
-            $new_user->updated_by = 1;
+            //$new_user->created_by = 1;
+            //$new_user->updated_by = 1;
+
+            //our user model requires a phone number, but the facebook api doesn't send back the phone, so we are going to set it to a default
+            //and then redirect them to the preferences page, to update this phone number
+
+
             if($new_user->save()){
+
                 Yii::$app->getSession()->setFlash(
-                    'success','We have created an account for you.'
+                    'success','We have created an account for you. Your current email is your password,
+                    Please update your password'
                 );
+                //log the user in
+                Yii::$app->user->login($new_user, 3600 * 24 * 30 );
 
             }
             else{
@@ -225,7 +234,7 @@ class SiteController extends Controller
         }
         Yii::info($userAttributes, 'debug');
         Yii::info($new_user->errors, 'debug');
-        //return $this->render()
+        //$this->redirect(['user/preference']);
     }
 
 

@@ -27,7 +27,7 @@ use Yii;
  * @property User $merchant
  * @property User $createdBy
  */
-class MerchantConfig extends \yii\db\ActiveRecord
+class MerchantConfig extends DoneDealModel
 {
     /**
      * @inheritdoc

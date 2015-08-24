@@ -199,6 +199,11 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * Updates the preferences of a logged in user.
+     *      * @return string
+     */
     public  function actionPreference()
     {
 
@@ -208,8 +213,6 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
-
-
             if($current_user->validate())
             {
                 $params = Yii::$app->request->post('User');
@@ -226,7 +229,6 @@ class UserController extends Controller
                 $current_user->city = $params['city'];
                 $current_user->dob = $params['dob'];
 
-
                 if($current_user->save())
                 {
                    Yii::$app->getSession()->setFlash('success','Profile successfully updated');
@@ -241,14 +243,8 @@ class UserController extends Controller
 
         }
 
-
-
-
-
-
         return $this->render('preferences',[
             'model' => $current_user
-
         ]);
     }
 

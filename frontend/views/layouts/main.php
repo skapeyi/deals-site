@@ -43,7 +43,7 @@ AppAsset::register($this);
             } else {
                 $menuItems[] = ['label' => 'My Account', 'url' => ['/user/dashboard']];
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Logout (' . Yii::$app->user->identity->email . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];

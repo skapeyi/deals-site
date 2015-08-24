@@ -65,14 +65,14 @@ class User extends DoneDealModel
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['phone', 'auth_key', 'password_hash', 'email'], 'required'],
             [['merchant', 'last_login', 'email_notifications', 'sms_notification', 'news_letter', 'new_deal', 'deal_failed', 'deal_purchase', 'voucher_activated', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['dob'], 'safe'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'home_address', 'home_address_1', 'country', 'city'], 'string', 'max' => 255],
             [['auth_key', 'firstname', 'lastname'], 'string', 'max' => 32],
             [['avatar_url', 'url'], 'string', 'max' => 64],
             [['phone'], 'string', 'max' => 12],
-            [['phone', 'email', 'username'], 'unique'],
+            [['phone', 'email'], 'unique'],
         ];
     }
 
@@ -91,7 +91,7 @@ class User extends DoneDealModel
             'avatar_url' => 'Avatar Url',
             'url' => 'Url',
             'password_reset_token' => 'Password Reset Token',
-            'phone' => 'Phon',
+            'phone' => 'Phone',
             'email' => 'Email',
             'merchant' => 'Merchant',
             'last_login' => 'Last Login',

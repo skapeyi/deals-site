@@ -24,7 +24,7 @@ use Yii;
  * @property User $createdBy
  * @property User $updatedBy
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends DoneDealModel
 {
     /**
      * @inheritdoc

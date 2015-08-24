@@ -21,7 +21,7 @@ use Yii;
  * @property Order $order
  * @property User $user
  */
-class Promocode extends \yii\db\ActiveRecord
+class Promocode extends DoneDealModel
 {
     /**
      * @inheritdoc
