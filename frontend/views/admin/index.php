@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = 'Account Settings';
                     <td><?php echo $user->email; ?></td>
                     <td><?php echo $user->phone; ?></td>
                     <td><?php echo $user->firstname; ?></td>
-                    <td><?php echo $user->firstname;?></td>
+                    <td><?php echo $user->lastname;?></td>
                     <td></td>
                     <td></td>
                 </tr>

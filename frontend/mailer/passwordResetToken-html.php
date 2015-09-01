@@ -12,4 +12,8 @@ $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 't
     <p>Follow the link below to reset your password:</p>
 
     <p><?= Html::a(Html::encode($resetLink), $resetLink) ?></p>
+
+    <p>Regards <br />DoneDeal Support <br /> Email: help@donedeal.ug, Telephone: 0200 905 030 <br />
+    <img src="https://ci5.googleusercontent.com/proxy/Qtve9mw1vFQXy5RUfO7ZNRuRYXwcTkGIDFAMEeyj81jJutfRa_bbGBabEVEarNdmeUE=s0-d-e1-ft#http://donedeal.ug/email.png"/>
+
 </div>
