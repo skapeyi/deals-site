@@ -5,14 +5,13 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\UserLocation;
 use frontend\models\search\UserLocationSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * UserLocationController implements the CRUD actions for UserLocation model.
  */
-class UserLocationController extends Controller
+class UserLocationController extends DoneDealController
 {
     public function behaviors()
     {

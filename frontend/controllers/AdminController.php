@@ -7,12 +7,11 @@
 
 namespace frontend\controllers;
 use yii;
-use yii\web\controller;
 use frontend\models\User;
 use yii\data\Pagination;
 
 
-class AdminController extends Controller {
+class AdminController extends DoneDealController {
 
     /**
      * Lists all users registered for the service
@@ -33,5 +32,7 @@ class AdminController extends Controller {
 
         ]);
     }
+
+
 
 }

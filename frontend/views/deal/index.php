@@ -10,46 +10,37 @@ use yii\grid\GridView;
 $this->title = 'Deals';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="deal-index">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"> All Deals</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <th>Deal</th>
+                <th>Discout & Price</th>
+                <th>Status</th>
+                <th>Reports</th>
+                <th>Merchant</th>
+                <th>Publish Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($models as $deal): ?>
+                <tr>
 
-    <p>
-        <?= Html::a('Create Deal', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                    <td><?php echo $user->email; ?></td>
+                    <td><?php echo $user->phone; ?></td>
+                    <td><?php echo $user->firstname; ?></td>
+                    <td><?php echo $user->firstname;?></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <?php  endforeach; ?>
+            </tbody>
+        </table>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'start_date',
-            'end_date',
-            'value',
-            // 'highlight:ntext',
-            // 'discount',
-            // 'merchant',
-            // 'quantity',
-            // 'purchased',
-            // 'fake_purchased',
-            // 'img_url:url',
-            // 'voucher_img_url:url',
-            // 'publish_status',
-            // 'seo_description',
-            // 'seo_keywords',
-            // 'status',
-            // 'source',
-            // 'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+    </div>
 </div>

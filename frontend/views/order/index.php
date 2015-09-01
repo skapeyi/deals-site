@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\OrderSearch */
@@ -10,35 +11,40 @@ use yii\grid\GridView;
 $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Manager Vouchers</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <th>Status</th>
+                <th>Deal</th>
+                <th>Code</th>
+                <th>Manage Status</th>
+                <th>Redeemed</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($models as $order): ?>
+                <tr>
 
-    <p>
-        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                    <td><?php echo $user->email; ?></td>
+                    <td><?php echo $user->phone; ?></td>
+                    <td><?php echo $user->firstname; ?></td>
+                    <td><?php echo $user->firstname;?></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <?php  endforeach; ?>
+            </tbody>
+        </table>
+        <?php echo LinkPager::widget([
+            'pagination' => $pages,
+        ]); ?>
+    </div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'code',
-            'deal_id',
-            'user_id',
-            'type',
-            // 'redeem_status',
-            // 'status',
-            // 'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
 </div>

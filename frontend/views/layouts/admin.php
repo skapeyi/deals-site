@@ -31,7 +31,7 @@ AppAsset::register($this);
                 'brandLabel' => 'DoneDeal',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-default navbar-fixed-top donedeal-nav',
                 ],
             ]);
             $menuItems = [
@@ -79,11 +79,11 @@ AppAsset::register($this);
                                 'label' => 'Adminstrator',
                                 'icon' => 'cloud',
                                 'items'=>[
-                                    ['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
-                                    ['label' => "All Deals", 'icon' => 'eye-open', 'url' =>''],
-                                    ['label' => "Manage Users", 'icon' => 'wrench', 'url' => ['admin/index']],
-                                    ['label' => "All Vouchers", 'icon' => 'gift', 'url' =>''],
-                                    ['label' => "Reports", 'icon' => 'globe', 'url' =>''],
+                                    //['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
+                                    ['label' => "Deals", 'icon' => 'eye-open', 'url' => ['deal/index']],
+                                    ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
+                                    ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],
+                                    ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/']],
                                 ]
 
                             ],

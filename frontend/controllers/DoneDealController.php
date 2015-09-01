@@ -8,7 +8,6 @@
 
 namespace frontend\controllers;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 class DoneDealController extends Controller {
     public function behaviors(){

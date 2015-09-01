@@ -144,7 +144,8 @@ class UserController extends Controller
 
         if(!Yii::$app->user->isGuest)
         {
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()))
+            {
 
                 if ($model->validate())
                 {

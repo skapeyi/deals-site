@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Deal;
+use frontend\models\Order;
+use yii\data\Pagination;
 use frontend\models\search\DealSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,13 +35,22 @@ class DealController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DealSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $this -> layout = "admin";
+        $query = Order::find()->where(['status' => 10]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'models' => $models,
+            'pages' => $pages,
+
         ]);
+
+        $this->layout = "admin";
+
     }
 
     /**
