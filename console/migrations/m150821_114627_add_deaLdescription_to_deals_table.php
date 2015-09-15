@@ -7,6 +7,11 @@ class m150821_114627_add_deaLdescription_to_deals_table extends Migration
 {
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         // add a deal details column on the deals table
         $this->addColumn('deal','details',Schema::TYPE_TEXT);
 
@@ -24,7 +29,7 @@ class m150821_114627_add_deaLdescription_to_deals_table extends Migration
             'updated_at' => Schema::TYPE_INTEGER,
             'created_by' => Schema::TYPE_INTEGER.'(11)',
             'updated_by' => Schema::TYPE_INTEGER. '(11)',
-        ]);
+        ],$tableOptions);
         $this->addForeignKey('dc_fk1','deal_category','created_at','user','id','CASCADE','CASCADE');
         $this->addForeignKey('dc_fk2','deal_category','created_by','user','id','CASCADE','CASCADE');
 

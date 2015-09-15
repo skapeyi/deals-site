@@ -34,5 +34,17 @@ class AdminController extends DoneDealController {
     }
 
 
+    /**
+     * @param $deal
+     * @param $quantity
+     *Generates a given number of vouchers for a given deal.
+     * These are mainly used by the admin for events.qZ3a-*+96
+     */
+    public function actionGeneratevouchers($deal, $quantity)
+    {
+
+    }
+
+
 
 }

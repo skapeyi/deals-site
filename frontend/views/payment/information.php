@@ -20,14 +20,7 @@ $this->title = 'DoneDeal - Trial Payment';
             <div class="col-md-4">
 <!-- put the sample form here...let user select which platform they want to use, then whether it is live or test,
  then provide the phone number -->
-                <?php $form = ActiveForm::begin(['id' => 'payment-form'/**,/'action' => ['/payment/payment']**/]); ?>
-                <?= $form->field($model,'mode')->dropDownList(['test' => 'Dummy Payment', 'live' => 'Live Payment'])->label('Choose if making a live or test payment'); ?>
-                <?= $form->field($model,'processor')->dropDownList(['mtn' => 'Pay With MTN','airtel' => 'Pay With Airtel'])->label('Choose network you want to pay with') ?>
-                <?= $form->field($model, 'phone')->label('Your Phone Number') ?>
-                <?= $form->field($model, 'amount')->label('Amount to transact') ?>
-                <?= Html::submitButton('Make Payment', ['class' => 'btn btn-primary btn-large', 'name' => 'login-button']) ?>
 
-                <?php ActiveForm::end(); ?>
 
             </div>
             <div class="col-md-4"></div>

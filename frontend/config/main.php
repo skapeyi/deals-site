@@ -25,11 +25,22 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                //WRITE TO THIS LOG LIKE THIS -> Yii::info('The Message goes here, u can even add data in a variable','dev');
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['info'],
-                    'categories' => ['debug'],
+                    'categories' => ['dev'],
                     'logFile' => '@app/runtime/logs/debug.log',
+                    'logVars' => [null], ///turns off $_SERVER AND ALLL THAT JAZZ IN THE REQUEST IN THE LOGS
+                ],
+                //WRITE TO THIS LOG LIKE THIS -> Yii::info('The Message goes here, u can even add data in a variable','payment');
+                //WE WILL WRITE ALL INFORMATION ABOUT PAYMENTS IN THIS LOG, EVEN DURING PRODUCTION
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['payment'],
+                    'logFile' => '@app/runtime/logs/payment.log',
+                    'logVars' => [null],
                 ],
             ],
         ],

@@ -49,7 +49,7 @@ class SignupForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
             if ($user->save()) {
-                // we need to send two email here to the user and the administrator
+                // we need to send two emails here to the user and the administrator
                 return $user;
             }
         }
