@@ -9,9 +9,10 @@ namespace frontend\controllers;
 use yii;
 use frontend\models\User;
 use yii\data\Pagination;
+use yii\web\Controller;
 
 
-class AdminController extends DoneDealController {
+class AdminController extends Controller {
 
     /**
      * Lists all users registered for the service

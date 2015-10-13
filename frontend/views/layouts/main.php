@@ -27,7 +27,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'DoneDeal',
+                'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top donedeal-nav',

@@ -29,7 +29,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'DoneDeal',
+                'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top donedeal-nav',
@@ -58,14 +58,14 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container-fluid push-breadcrumb-down">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <!--Create a row and a sidebar here -->
             <div  class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <?php echo SideNav::widget([
                         'type' => SideNav::TYPE_DEFAULT,
                         'heading' => 'My Account',
@@ -83,6 +83,7 @@ AppAsset::register($this);
                                     //['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
                                     ['label' => "Deals", 'icon' => 'eye-open', 'url' => ['deal/index']],
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
+                                    ['label' => "Payments", 'icon' => 'money', 'url' => ['payment/']],
                                     ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],
                                     ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/']],
                                 ]
@@ -118,7 +119,7 @@ AppAsset::register($this);
                     ]); ?>
 
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <?= $content ?>
                 </div>
             </div>
