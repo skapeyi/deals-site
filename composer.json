@@ -27,7 +27,9 @@
         "romdim/yii2-bootstrap-material": "dev-master",
         "yiisoft/yii2-authclient": "^2.0",
         "kartik-v/yii2-checkbox-x": "*",
-        "2amigos/yii2-tinymce-widget" : "*"
+        "2amigos/yii2-tinymce-widget" : "*",
+        "kartik-v/yii2-mpdf": "*",
+        "mickgeek/yii2-daslider": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -1,4 +1,4 @@
-DoneDeal Web and Api
+DoneDeal Web and API
 ===============================
 
 Done Deal offers the best deals on services in Uganda. Done Deal gives you an opportunity to try out new experiences to a greatly
@@ -10,7 +10,11 @@ connect the mobile apps to the data store.
 
 How To Set Up
 ------------------
-1. Clone repository
+1. Move into your application directory
+2. Run ``git remote add origin https://locaiton of the repository``
+3. Run ``git pull - u origin name-of-branch-u-want``
+4. Run ``composer global require "fxp/composer-asset-plugin:~1.0.3"`` If you don't have composer, [install composer from here] (https://getcomposer.org/download/) before running the composer global require.
+6. Run ``composer install``
 2. Run ```init```
 3. Edit ```common/config/main-local.php``` and add the db name
 4. Run ```yii migrate``` to run the migrations and set up the database
@@ -18,9 +22,6 @@ How To Set Up
 5. Set the document root to point to ```frontend/web``` and you are good to start using the web app.
 6. To set up an api endpoint, create a sub-domain e.g ```api.domain.com``` then set its document root to ```api/web```
 then refer to the API documentation on which calls are available for you
-
-Change Log
------------------
 
 
 DIRECTORY STRUCTURE
@@ -67,4 +68,4 @@ tests                    contains various tests for the advanced application
 ```
 Help?!!
 ------------------------
-If you need any assistance, please contact developer@donedeal.ug
+If you need any assistance, please contact developer@donedeal.ug 

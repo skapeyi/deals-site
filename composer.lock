@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf6951df0cde7312eabd672e549b4be7",
+    "hash": "9c28d5c96787c3ded80ac72d82762668",
+    "content-hash": "6432ef34bd4f5e86274e6f2bb7b1c1ac",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -705,6 +706,49 @@
             "time": "2015-07-14 09:54:25"
         },
         {
+            "name": "kartik-v/mpdf",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/mpdf.git",
+                "reference": "6ab0ae3a82673e514f168c8e6da02289e6d95f2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/mpdf/zipball/6ab0ae3a82673e514f168c8e6da02289e6d95f2c",
+                "reference": "6ab0ae3a82673e514f168c8e6da02289e6d95f2c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=4.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "mpdf.php",
+                    "classes"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-1.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Ian N Back"
+                }
+            ],
+            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support. This is a fork of the official mPDF library.",
+            "homepage": "http://www.mpdf1.com/mpdf/index.php",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "time": "2015-05-05 07:34:49"
+        },
+        {
             "name": "kartik-v/yii2-checkbox-x",
             "version": "v1.0.1",
             "source": {
@@ -797,6 +841,53 @@
                 "yii2"
             ],
             "time": "2015-06-16 05:19:57"
+        },
+        {
+            "name": "kartik-v/yii2-mpdf",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-mpdf.git",
+                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/4599a1d95d7e0afb3279322e302717b7e4f52dd3",
+                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/mpdf": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\mpdf\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
+            "homepage": "https://github.com/kartik-v/yii2-mpdf",
+            "keywords": [
+                "component",
+                "extension",
+                "html",
+                "mpdf",
+                "pdf",
+                "utf8",
+                "yii2"
+            ],
+            "time": "2014-11-10 18:09:37"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -1742,6 +1833,52 @@
                 "yii2"
             ],
             "time": "2014-11-09 19:54:17"
+        },
+        {
+            "name": "mickgeek/yii2-daslider",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mickgeek/yii2-daslider.git",
+                "reference": "9cc823ad0c713b9eaac8e4e4dc77b5d3025007b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mickgeek/yii2-daslider/zipball/9cc823ad0c713b9eaac8e4e4dc77b5d3025007b9",
+                "reference": "9cc823ad0c713b9eaac8e4e4dc77b5d3025007b9",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "mickgeek\\daslider\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Oleg Belostotskiy",
+                    "email": "olgblst@gmail.com",
+                    "homepage": "http://mickgeek.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Content slider with delayed animations and background parallax effect.",
+            "homepage": "https://github.com/mickgeek/yii2-daslider",
+            "keywords": [
+                "extension",
+                "parallax",
+                "slider",
+                "widget",
+                "yii2"
+            ],
+            "time": "2014-08-16 09:03:11"
         },
         {
             "name": "romdim/yii2-bootstrap-material",

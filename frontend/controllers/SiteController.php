@@ -236,6 +236,11 @@ class SiteController extends Controller
         Yii::info($new_user->errors, 'debug');
         //$this->redirect(['user/preference']);
     }
+    public function actionDeal()
+    {
+        return $this->render('deal');
+
+    }
 
 
 
