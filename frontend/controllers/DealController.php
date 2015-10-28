@@ -73,7 +73,6 @@ class DealController extends Controller
     public function actionCreate()
     {
         $this->layout = "admin";
-
         //get all categories to generate the check boxes for the categories
 
 

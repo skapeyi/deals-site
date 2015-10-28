@@ -94,3 +94,19 @@ body{
 .deal-col-right{
     padding-right: 0px;
 }
+.currency{
+    text-align: right;
+}
+.align-right{
+    text-align: right;
+}
+.da-slide h2{
+    color: #ffffff;
+}
+.da-slide p{
+    color: #ffffff;
+    font-size: 20px;
+}
+.deal_thumbnail{
+    width: 100%;
+}

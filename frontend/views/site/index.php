@@ -9,26 +9,23 @@ $this->title = 'DoneDeal - The Best Deals Around Town';
 <!--the slider contains the featured deals-->
 <div class="row">
     <?php DaSlider::begin([
-        'clientOptions' => ['bgincrement' => 10, 'interval' => 6000],
+        'clientOptions' => ['bgincrement' => 10, 'interval' => 10000],
     ]); ?>
     <div class="da-slide">
-        <h2>Opera</h2>
-        <p>Opera is a web browser developed by Opera Software. The latest version currently runs on Microsoft Windows and OS X operating systems and uses the Blink layout engine.</p>
-        <?= Html::a('Read more', '#', ['class' => 'da-link btn btn-default btn-lg']) ?>
+        <h2>2 For 1 Pizza At The Pizza place  </h2>
+        <p>2 For 1 Chicken Pizza (50% discount) for a deal price of 23 000UGX instead of 46 000UGX that you SAVE 23 000UGX any day of the week. </p>
+        <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
+        <?= Html::img('@web/images/img1.png', ['alt' => 'Pizza']) ?>
 
-        <div class="da-img">
-            <?= Html::img('/img/1.png', ['alt' => 'Opera']) ?>
-        </div>
     </div>
     <div class="da-slide">
-        <h2>CloneDVD</h2>
-        <p>CloneDVD is a proprietary DVD cloning software, developed by Elaborate Bytes, that can be used to make backup copies of any DVD movie not copy-protected.</p>
-        <?= Html::a('Read more', '#', ['class' => 'da-link btn btn-default btn-lg']) ?>
+        <h2> Aromatherapy Massage (33% Discount) </h2>
+        <p>33% Discount of an Aromatherapy Massage at a deal price of 40 000UGX instead of 60 000UGX (SAVE 20 000UGX) </p>
+        <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
+        <?= Html::img('@web/images/massage.png', ['alt' => 'Massage']) ?>
 
-        <div class="da-img">
-            <?= Html::img('/img/2.png', ['alt' => 'CloneDVD']) ?>
-        </div>
     </div>
+
     <?php DaSlider::end(); ?>
 
 </div>
