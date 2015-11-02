@@ -241,6 +241,15 @@ class SiteController extends Controller
         return $this->render('deal');
 
     }
+    public function actionVoucher(){
+        $this->layout = 'pdf';
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $this->render('voucher');
+        return $pdf->render();
+    }
+    public function actionVouch(){
+        return $this->render('voucher');
+    }
 
 
 

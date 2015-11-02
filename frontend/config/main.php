@@ -84,22 +84,24 @@ return [
                 'encryption' => 'tls',
             ],
         ],
-        'urlManager' => [
-            'class' => 'yii\web\UrlManager',
-            // Disable index.php
-            'showScriptName' => false,
-            // Disable r= routes
-            'enablePrettyUrl' => true,
-            'rules' => array(
-
-            ),
-        ],
+//        'urlManager' => [
+//            'class' => 'yii\web\UrlManager',
+//            // Disable index.php
+//            'showScriptName' => false,
+//            // Disable r= routes
+//            'enablePrettyUrl' => true,
+//            'rules' => array(
+//
+//            ),
+//        ],
         //the mpdf global component
         'pdf' => [
             'class' => Pdf::classname(),
             'format' => Pdf::FORMAT_A4,
             'orientation' => Pdf::ORIENT_PORTRAIT,
             'destination' => Pdf::DEST_BROWSER,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/bootstrap.min.css',
+
             // refer settings section for all configuration options
         ],
         //the slider

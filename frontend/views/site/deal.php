@@ -129,7 +129,7 @@ $this->title = 'Deal Name';
             </div>
             <div class="col-md-12">
                 <div class="panel panel default">
-                    
+
                     <div class="panel-body">
                         <?php echo Html::img('@web/images/gym.png',['class'=>'deal_thumb']) ?>
                         <h4 class="deal-title center-justified ">Gym Deal</h4>
