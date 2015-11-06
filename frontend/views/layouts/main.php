@@ -34,13 +34,11 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Sign In', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Sign Up', 'url' => ['/site/signup']];
             } else {
                 $menuItems[] = ['label' => 'My Account', 'url' => ['/user/dashboard']];
                 $menuItems[] = [
@@ -56,6 +54,8 @@ AppAsset::register($this);
             ]);
             NavBar::end();
         ?>
+<!--        Let us add the second nav bar that is going to contain the categories-->
+
 
         <div class="container">
         <?= Breadcrumbs::widget([

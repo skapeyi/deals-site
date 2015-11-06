@@ -5,7 +5,7 @@ use yii\helpers\Html;
 $this->title = 'Vouchers | DoneDeal';
 ?>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 background">
         <h2>some text</h2>
     </div>
 
