@@ -128,6 +128,21 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+                // Send email to admin
+                Yii::$app->mailer->compose(['html' => 'adminSignupemail-html', 'text' => 'adminSignupemail-text'], ['user' => $user])
+                    ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' Support'])
+                    ->setTo('developer@donedeal.ug')
+                    ->setSubject('Password reset for ' . \Yii::$app->name)
+                    ->send();
+
+                //send email to user
+                Yii::$app->mailer->compose(['html' => 'userSignupemail-html', 'text' => 'userSignupemail-text'], ['user' => $user])
+                    ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' Support'])
+                    ->setTo($user->email)
+                    ->setSubject('Password reset for ' . \Yii::$app->name)
+                    ->send();
+
+                //then login the user
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

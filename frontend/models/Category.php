@@ -16,7 +16,7 @@ use Yii;
  * @property integer $created_by
  * @property integer $updated_by
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends DoneDealModel
 {
     /**
      * @inheritdoc
