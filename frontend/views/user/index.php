@@ -19,46 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'firstname',
-            // 'lastname',
-            // 'avatar_url:url',
-            // 'url:url',
-            // 'password_reset_token',
-            // 'phone',
-            // 'email:email',
-            // 'merchant',
-            // 'last_login',
-            // 'email_notifications:email',
-            // 'sms_notification',
-            // 'news_letter',
-            // 'new_deal',
-            // 'deal_failed',
-            // 'deal_purchase',
-            // 'voucher_activated',
-            // 'home_address',
-            // 'home_address_1',
-            // 'country',
-            // 'city',
-            // 'dob',
-            // 'status',
-            // 'source',
-            // 'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
 </div>

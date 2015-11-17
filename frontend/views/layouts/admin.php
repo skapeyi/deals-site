@@ -82,6 +82,8 @@ AppAsset::register($this);
                                 'items'=>[
                                     //['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
                                     ['label' => "Deals", 'icon' => 'eye-open', 'url' => ['deal/index']],
+                                    ['label' => "Deal Categories", 'icon' => 'eye-open', 'url' => ['category/index']],
+                                    ['label' => "Merchants", 'icon' => 'eye-open', 'url' => ['user/merchant']],
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
                                     ['label' => "Payments", 'icon' => 'money', 'url' => ['payment/']],
                                     ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],

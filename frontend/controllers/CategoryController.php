@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Category;
+use yii\filters\AccessControl;
 use frontend\models\search\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,6 +24,21 @@ class CategoryController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view','create','update','delete'],
+                        'roles' => ['@'],
+                    ]
+                ],
+                'denyCallback'  => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue');
+                    Yii::$app->user->loginRequired();
+                },
+
+            ],
         ];
     }
 
@@ -32,12 +48,13 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $this->layout ="admin";
+//        $searchModel = new CategorySearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -60,13 +77,13 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout ="admin";
         $model = new Category();
-
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }

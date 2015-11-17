@@ -9,6 +9,7 @@ use frontend\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -24,6 +25,21 @@ class UserController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view','create','update','delete','dashboard','credit','password','voucher','preference','location','dashboard','admin','merchant'],
+                        'roles' => ['@'],
+                    ]
+                ],
+                'denyCallback'  => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue');
+                    Yii::$app->user->loginRequired();
+                },
+
+            ],
         ];
     }
 
@@ -34,11 +50,11 @@ class UserController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            //'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -61,6 +77,7 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = "admin";
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -207,7 +224,6 @@ class UserController extends Controller
      */
     public  function actionPreference()
     {
-
         $model = new User();
         $current_user = $model->findOne(['id' => Yii::$app->user->getId()]);
         $this->layout = "admin";
@@ -276,7 +292,7 @@ class UserController extends Controller
 
         ]);
     }
-    public function actionAdmin(){
+    public function actionMerchant(){
         $this->layout = 'admin';
         return $this->render('admin');
     }
