@@ -22,7 +22,7 @@ class m150805_140946_create_deals_table extends Migration
             'fine_print' => Schema::TYPE_TEXT,
             'content' => Schema::TYPE_TEXT,
             'discount' => Schema::TYPE_SMALLINT.' NOT NULL',
-            'merchant' => Schema::TYPE_INTEGER.'(11)',
+            'merchant_id' => Schema::TYPE_INTEGER.'(11)',
             'quantity' => Schema::TYPE_SMALLINT.' NOT NULL',
             'purchased' => Schema::TYPE_SMALLINT,
             'fake_purchased' => Schema::TYPE_INTEGER,

@@ -3,7 +3,6 @@
 namespace frontend\models;
 
 use Yii;
-
 /**
  * This is the model class for table "deal".
  *
@@ -13,9 +12,10 @@ use Yii;
  * @property string $end_date
  * @property integer $value
  * @property string $highlight
- * @property string $details
+ * @property string $fine_print
+ * @property string $content
  * @property integer $discount
- * @property integer $merchant
+ * @property integer $merchant_id
  * @property integer $quantity
  * @property integer $purchased
  * @property integer $fake_purchased
@@ -30,9 +30,20 @@ use Yii;
  * @property integer $updated_at
  * @property integer $created_by
  * @property integer $updated_by
+ * @property string $details
+ * @property integer $featured
+ * @property integer $location_id
+ * @property integer $category_id
  *
+ * @property User $merchant
+ * @property Category $category
+ * @property User $createdBy
+ * @property Location $location
+ * @property User $updatedBy
  * @property Order[] $orders
  */
+
+
 class Deal extends DoneDealModel
 {
     /**
@@ -49,10 +60,10 @@ class Deal extends DoneDealModel
     public function rules()
     {
         return [
-            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity', 'created_at', 'updated_at'], 'required'],
+            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity', 'created_at', 'updated_at','merchant_id'], 'required'],
             [['start_date', 'end_date'], 'safe'],
-            [['value', 'discount', 'merchant', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['highlight','details'], 'string'],
+            [['value', 'discount', 'merchant_id', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by', 'featured', 'location_id', 'category_id'], 'integer'],
+            [['highlight', 'fine_print', 'content', 'details'], 'string'],
             [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255]
         ];
     }
@@ -70,13 +81,13 @@ class Deal extends DoneDealModel
             'value' => 'Value',
             'highlight' => 'Highlight',
             'discount' => 'Discount',
-            'merchant' => 'Merchant',
+            'merchant_id' => 'Merchant',
             'quantity' => 'Number of Deal Available',
             'purchased' => 'Purchased',
-            'fake_purchased' => 'Fake Purchased',
+            'fake_purchased' => 'Number of Fake Deal',
             'img_url' => 'Deal Image',
             'voucher_img_url' => 'Voucher Img Url',
-            'publish_status' => 'Publish Status',
+            'publish_status' => 'Published',
             'seo_description' => 'Seo Description',
             'seo_keywords' => 'Seo Keywords',
             'status' => 'Status',
@@ -87,6 +98,46 @@ class Deal extends DoneDealModel
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMerchant()
+    {
+        return $this->hasOne(User::className(), ['id' => 'merchant_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocation()
+    {
+        return $this->hasOne(Location::className(), ['id' => 'location_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**

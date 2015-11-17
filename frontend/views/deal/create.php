@@ -1,11 +1,14 @@
 <?php
 
-use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\switchinput\SwitchInput;
-use kartik\widgets\FileInput;
-use kartik\checkbox\CheckboxX;
 use dosamigos\tinymce\TinyMce;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use common\models\User;
+use kartik\file\FileInput;
+use frontend\models\Category;
+
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Deal */
 
@@ -26,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'details')->widget(TinyMce::className(), [
                                   'options' => ['rows' => 6],
-                                  'language' => 'es',
+                                  'language' => 'en_GB',
                                   'clientOptions' => [
                                       'plugins' => [
-                                          "advlist autolink lists link charmap print preview anchor",
+                                          "advlist autolink lists link charmap preview anchor",
                                           "searchreplace visualblocks code fullscreen",
                                           "insertdatetime media contextmenu paste"
                                       ],
@@ -48,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li class="active"><a href="#tab_a" data-toggle="pill">Deal Details</a></li>
                     <li><a href="#tab_b" data-toggle="pill">Deal Pricing</a></li>
                     <li><a href="#tab_c" data-toggle="pill">Purchase Limits</a></li>
-                    <li><a href="#tab_d" data-toggle="pill">Voucher</a></li>
+<!--                    <li><a href="#tab_d" data-toggle="pill">Voucher</a></li>-->
                     <li><a href="#tab_e" data-toggle="pill">Deal Image</a></li>
                 </ul>
                 <div class="tab-content col-md-9">
@@ -63,16 +66,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tab-pane" id="tab_c">
                         <h4>Purchase Limits</h4>
                         <?= $form->field($model,'quantity');?>
+                        <?= $form->field($model,'fake_purchased');?>
                     </div>
-                    <div class="tab-pane" id="tab_d">
-                        <h4>Voucher</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                                      ac turpis egestas.</p>
-                    </div>
+<!--                    <div class="tab-pane" id="tab_d">-->
+<!--                        <h4>Voucher Image</h4>-->
+<!--                        <p>Upload voucher image here, if you want to customize the voucher per deal.</p>-->
+<!--                    </div>-->
                     <div class="tab-pane" id="tab_e">
-                        <h4>Voucher</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                                      ac turpis egestas.</p>
+                        <h4>Deal Image Voucher</h4>
+                        <?php echo FileInput::widget([
+                            'name' => 'attachment_53',
+                            'pluginOptions' => [
+                                'showCaption' => false,
+                                'showRemove' => false,
+                                'showUpload' => false,
+                                'browseClass' => 'btn btn-primary btn-block',
+                                'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                                'browseLabel' =>  'Select Photo'
+                            ],
+                            'options' => ['accept' => 'image/*']
+                        ]);?>
                     </div>
                 </div><!-- Tab content End -->
             </div><!--Panel body End-->
@@ -92,19 +105,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     'pluginOptions' => [
                         'onColor' => 'success',
                         'offColor' => 'danger',
-                        'onText' => 'Published',
-                        'offText' => 'Un-Published'
+                        'onText' => 'Yes',
+                        'offText' => 'No'
+                    ]]) ?>
+                <?= $form->field($model, 'featured')->widget(SwitchInput::className(),[
+                    'pluginOptions' => [
+                        'onColor' => 'success',
+                        'offColor' => 'danger',
+                        'onText' => 'Yes',
+                        'offText' => 'No'
                     ]]) ?>
             </div>
 
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Categories and Tags</h3>
+                <h3 class="panel-title">Deal Category</h3>
+
 
             </div>
             <div class="panel-body">
-                <?=  $form->field($model, 'status')->checkboxList($model->deal_categories, ['unselect'=>NULL]);?>
+                <?= $form->field($model,'category_id')->widget(Select2::className(),[
+                    'data' => ArrayHelper::map(Category::find()->all(),'id','name')
+                ]); ?>
             </div>
 
         </div>
@@ -114,7 +137,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="panel-title">Merchant</h3>
             </div>
             <div class="panel-body">
-                <?= $form->field($model,'merchant'); ?>
+                <?= $form->field($model,'merchant_id')->widget(Select2::className(),[
+                    'data' => ArrayHelper::map(User::find()->where(['merchant' => [1]])->all(),'user_id','firstname')
+                ]); ?>
             </div>
 
         </div>
