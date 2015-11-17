@@ -13,7 +13,7 @@ class m150911_070732_create_temp_payments_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{payment}}',[
+        $this->createTable('{{%payment}}',[
             'id' => Schema::TYPE_PK, // same us the merchant_transaction_id
             'merchant_transaction_id' => Schema::TYPE_STRING,
             'yodime_transaction_id' => Schema::TYPE_INTEGER,

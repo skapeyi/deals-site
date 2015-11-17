@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m150805_153245_create_voucher_table extends Migration
+class m151106_152720_add_location_table extends Migration
 {
     public function up()
     {
@@ -13,36 +13,41 @@ class m150805_153245_create_voucher_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%voucher}}',[
+        //deals should have locations, such that we can filter them according to locations
+        $this->createTable('{{%location}}',[
             'id' => Schema::TYPE_PK,
-            'code' => Schema::TYPE_STRING.'(32)',
-            'deal_id' => Schema::TYPE_INTEGER.'(11)',
-            'user_id' => Schema::TYPE_INTEGER.'(11)',
-            'type' => Schema::TYPE_BOOLEAN.' DEFAULT 0',//diff between admin generated vouchers(for events) and the rest
-            'redeem_status' => Schema::TYPE_BOOLEAN.' DEFAULT 0',
-            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
+            'name' => Schema::TYPE_STRING,
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'created_by' => Schema::TYPE_INTEGER.'(11)',
             'updated_by' => Schema::TYPE_INTEGER. '(11)',
 
-        ],$tableOptions);
+        ], $tableOptions);
+        //add foreign keys to the location table
+        $this->addForeignKey('location_fk1','location','created_by','user','id','CASCADE','CASCADE');
+        $this->addForeignKey('location_fk2','location','updated_by','user','id','CASCADE','CASCADE');
+
+        // add location to the deal
+        $this->addColumn('deal', 'location_id', Schema::TYPE_INTEGER.'(11)');
+
+        //add foreign key to the deal table
+        $this->addForeignKey('deal_fk_location','deal','location_id','location','id','CASCADE','CASCADE');
 
     }
 
     public function down()
     {
-        echo "m150805_153245_create_voucher_table cannot be reverted.\n";
+        echo "m151106_152720_add_location_table cannot be reverted.\n";
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

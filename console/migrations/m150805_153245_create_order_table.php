@@ -15,11 +15,11 @@ class m150805_153245_create_order_table extends Migration
 
         $this->createTable('{{%order}}',[
             'id' => Schema::TYPE_PK,
-            'code' => Schema::TYPE_STRING.'(32)',
+            'voucher_code' => Schema::TYPE_STRING.'(32)',
             'deal_id' => Schema::TYPE_INTEGER.'(11)',
             'user_id' => Schema::TYPE_INTEGER.'(11)',
             'type' => Schema::TYPE_BOOLEAN.' DEFAULT 0',//diff between admin generated vouchers(for events) and the rest
-            'redeem_status' => Schema::TYPE_BOOLEAN.' DEFAULT 0',
+            'redeem_status' => Schema::TYPE_SMALLINT.' DEFAULT 0',
             'feedback' => Schema::TYPE_TEXT,
             'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
