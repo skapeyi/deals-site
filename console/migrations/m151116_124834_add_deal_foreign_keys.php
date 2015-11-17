@@ -17,8 +17,8 @@ class m151116_124834_add_deal_foreign_keys extends Migration
         $this->addForeignKey('deal_fk_merchant','deal','merchant_id','user','id','CASCADE','CASCADE');
 
         // add deal category -- each deal belongs to one category
-        $this->addColumn('deal','category_id','integer(11)');
-        $this->addForeignKey('deal_fk_category','deal','category_id','category','id','CASCADE','CASCADE');
+        //$this->addColumn('deal','category_id','integer(11)');
+        //$this->addForeignKey('deal_fk_category','deal','category_id','category','id','CASCADE','CASCADE');
     }
 
     public function down()
