@@ -41,8 +41,8 @@ AppAsset::register($this);
                 ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] =  Html::button('Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+                $menuItems[] = Html::button('Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
             } else {
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->email . ')',
@@ -137,7 +137,20 @@ AppAsset::register($this);
         </div>
     </footer>
 
-    
+    <?php
+    Modal::begin([
+        'id' => 'signupModal',
+    ]);
+    echo "<div id = 'signupModalContent'></div>";
+    Modal::end();
+    ?>
+    <?php
+    Modal::begin([
+        'id' => 'signinModal',
+    ]);
+    echo "<div id = 'signinModalContent'></div>";
+    Modal::end();
+    ?>
 
     <?php $this->endBody() ?>
 </body>

@@ -5,6 +5,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -37,8 +39,8 @@ AppAsset::register($this);
 
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Sign In', 'url' => ['/site/login']];
-                $menuItems[] = ['label' => 'Sign Up', 'url' => ['/site/signup']];
+                $menuItems[] =  Html::button('Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+                $menuItems[] = Html::button('Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
             } else {
                 $menuItems[] = ['label' => 'My Account', 'url' => ['/user/dashboard']];
                 $menuItems[] = [
@@ -69,9 +71,23 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; DoneDeal <?= date('Y') ?></p>
-        <p class="pull-right">The Best Deals In Town</p>
+        <p class="pull-right">The Best Deals In Town </p>
         </div>
     </footer>
+    <?php
+    Modal::begin([
+        'id' => 'signupModal',
+    ]);
+    echo "<div id = 'signupModalContent'></div>";
+    Modal::end();
+    ?>
+    <?php
+    Modal::begin([
+        'id' => 'signinModal',
+    ]);
+    echo "<div id = 'signinModalContent'></div>";
+    Modal::end();
+    ?>
 
     <?php $this->endBody() ?>
 </body>

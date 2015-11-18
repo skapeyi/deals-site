@@ -10,5 +10,19 @@ $(document).ready(function(){
             .load($(this).attr('value'));
     });
 
+    //    signin modal
+    $('#signinmodalButton').click(function(){
+        $('#signinModal').modal('show')
+            .find('#signinModalContent')
+            .load($(this).attr('value'));
+    });
+
+    //    signupmodal
+    $('#signupmodalButton').click(function(){
+        $('#signupModal').modal('show')
+            .find('#signupModalContent')
+            .load($(this).attr('value'));
+    });
+
 
 });
