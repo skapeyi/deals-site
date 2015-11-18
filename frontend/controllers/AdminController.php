@@ -10,9 +10,39 @@ use yii;
 use frontend\models\User;
 use yii\data\Pagination;
 use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 
 class AdminController extends Controller {
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['merchant','index'],
+                        'roles' => ['@'],
+                    ]
+                ],
+                'denyCallback'  => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue');
+                    Yii::$app->user->loginRequired();
+                },
+
+            ],
+        ];
+    }
+
 
     /**
      * Lists all users registered for the service
@@ -20,7 +50,7 @@ class AdminController extends Controller {
     public function actionIndex()
     {
         $this->layout = "admin";
-        $query = User::find()->where(['status' => 10]);
+        $query = User::find()->where(['status' => 10,'merchant' => 0]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
         $models = $query->offset($pages->offset)
@@ -32,6 +62,26 @@ class AdminController extends Controller {
             'pages' => $pages,
 
         ]);
+    }
+
+   //Finds all merchants in the system
+    public function actionMerchant()
+    {
+        $this->layout = 'admin';
+        $query = User::find()->where(['status' => 10,'merchant' => 1]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('merchant', [
+            'models' => $models,
+            'pages' => $pages,
+
+        ]);
+
+
     }
 
 
