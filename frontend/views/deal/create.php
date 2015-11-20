@@ -88,10 +88,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);?>
                     </div>
                 </div><!-- Tab content End -->
+
             </div><!--Panel body End-->
 
-        </div>
 
+        </div>
+        <a href="create" class="btn input-block-level form-control btn-primary">Save Deal</a>
     </div>
     <div class="col-md-3">
         <div class="panel panel-default">
@@ -145,6 +147,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
 
+
+    </div>
+    <div class="row">
 
     </div>
     <?php ActiveForm::end(); ?>

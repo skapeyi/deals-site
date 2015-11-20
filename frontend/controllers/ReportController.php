@@ -7,9 +7,10 @@
  */
 
 namespace frontend\controllers;
+use yii\web\Controller;
 
 
-class ReportController extends DoneDealController {
+class ReportController extends Controller {
 
     public function actionIndex(){
         $this -> layout = "admin";

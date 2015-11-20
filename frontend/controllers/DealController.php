@@ -7,6 +7,7 @@ use frontend\models\Deal;
 use frontend\models\Order;
 use yii\data\Pagination;
 use frontend\models\search\DealSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +27,21 @@ class DealController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['@'],
+                    ]
+                ],
+                'denyCallback'  => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue');
+                    Yii::$app->user->loginRequired();
+                },
+            ]
         ];
     }
 

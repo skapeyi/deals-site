@@ -7,6 +7,8 @@ use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use kartik\icons\Icon;
+Icon::map($this);
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -20,6 +22,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/donedeal.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -32,34 +35,37 @@ AppAsset::register($this);
                 'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-default navbar-fixed-top donedeal-nav',
+                    'class' => 'navbar-default navbar-fixed-top ',
+                    'id' => 'logo-nav',
                 ],
             ]);
             $menuItems = [
 
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] =  Html::button('Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-                $menuItems[] = Html::button('Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-            } else {
-                $menuItems[] = ['label' => 'My Account', 'url' => ['/user/dashboard']];
+                $menuItems[] =  Html::button(Icon::show('sign-in').'Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+                -                $menuItems[] = Html::button(Icon::show('user').'Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+            }
+            else
+            {
+                $menuItems[] = ['label' => Icon::show('user').'Account', 'url' => ['/user/dashboard']];
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->email . ')',
+                    'label' => Icon::show('sign-out').' Logout (' . Yii::$app->user->identity->email . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
-
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
+                'encodeLabels' => false,
                 'items' => $menuItems,
             ]);
             NavBar::end();
         ?>
-<!--        Let us add the second nav bar that is going to contain the categories-->
 
 
-        <div class="container">
+
+        <div class="container" id="page-container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

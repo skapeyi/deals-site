@@ -7,7 +7,7 @@
 }
 
 .navbar-default.navbar{
-    color: #fff;
+    color: #636;
     background-color: #663366;
 }
 
@@ -16,6 +16,8 @@ a, a:hover, a:focus {
 }
 body{
     background-color: #ffffff;
+    padding-top: 50px;
+
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
@@ -118,4 +120,16 @@ body{
     background-image: url("../images/background.png");
     background-size: cover;
 
+}
+#page-container{
+    padding-top: 5px;
+}
+#logo-nav{
+    background: #cfcecc;
+}
+.btn-primary:not(.btn-link):not(.btn-flat){
+    background-color: #636;
+}
+.btn-primary:not(.btn-link):not(.btn-flat):hover{
+    background-color: #261426;
 }

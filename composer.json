@@ -29,7 +29,8 @@
         "kartik-v/yii2-checkbox-x": "*",
         "2amigos/yii2-tinymce-widget" : "*",
         "kartik-v/yii2-mpdf": "*",
-        "mickgeek/yii2-daslider": "*"
+        "mickgeek/yii2-daslider": "*",
+        "kartik-v/yii2-icons": "^1.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

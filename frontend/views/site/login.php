@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\icons\Icon;
+Icon::map($this);
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -15,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Please fill out the following fields to login:</p>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-12">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?= $form->field($model, 'email') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
@@ -25,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             <div class="form-inline">
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-large', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(Icon::show('sign-in').'Login', ['class' => 'btn btn-primary btn-large', 'name' => 'login-button']) ?>
                 </div>
                 <div class="form-group">
                     <?= yii\authclient\widgets\AuthChoice::widget([

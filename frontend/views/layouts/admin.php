@@ -6,6 +6,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 use kartik\sidenav\SideNav;
+use yii\bootstrap\Modal;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -26,39 +27,8 @@ AppAsset::register($this);
 
 <body>
     <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-default navbar-fixed-top donedeal-nav',
-                ],
-            ]);
-            $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] =  Html::button('Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-                $menuItems[] = Html::button('Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-            } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->email . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
-
-            }
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
-        ?>
-
-        <div class="container-fluid push-breadcrumb-down">
+    <div class="">
+        <div class="container-fluid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -87,7 +57,7 @@ AppAsset::register($this);
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
                                     ['label' => "Payments", 'icon' => 'money', 'url' => ['payment/']],
                                     ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],
-                                    ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/']],
+                                    ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/index']],
                                 ]
 
                             ],
