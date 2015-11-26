@@ -95,12 +95,15 @@ class DealController extends Controller
 
         $model = new Deal();
         $all_categories = Category::find()->all();
-        $model->deal_categories = \yii\helpers\ArrayHelper::map($all_categories, 'id', 'name');
+        //$model->deal_categories = \yii\helpers\ArrayHelper::map($all_categories, 'id', 'name');
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }
+        else
+        {
             return $this->render('create', [
                 'model' => $model,
             ]);

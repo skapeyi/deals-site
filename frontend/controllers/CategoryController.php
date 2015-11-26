@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Category;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use frontend\models\search\CategorySearch;
 use yii\web\Controller;
@@ -49,12 +50,22 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $this->layout ="admin";
-//        $searchModel = new CategorySearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // we need to find all the categories in here, the date created, the id and the category creator
+        $query = (new \yii\db\Query())->select('category.id, category.name, category.created_at, user.email')->from('category')->leftJoin('user', 'user.id = category.created_by')->where(['category.status' => 10])->orderBy('category.created_at DESC');
+
+        $countquery = clone $query; // the count query is used for pagination
+
+        //set up the pagination parameters
+        $pages = new Pagination(['totalCount' => $countquery->count(),'defaultPageSize' => 10]);
+
+        //then find the actual categories, depending on the pagination size
+        $categories = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
         return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
+            'categories' => $categories,
+            'pages' => $pages,
         ]);
     }
 
@@ -81,7 +92,7 @@ class CategoryController extends Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,

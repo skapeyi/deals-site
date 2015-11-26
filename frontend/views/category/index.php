@@ -29,13 +29,41 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="panel-body">
             <table class="table table-striped table-bordered">
+                <thead>
+                   <tr>
+                       <td><strong>Category Name</strong></td>
+                       <td><strong>No of Deals</strong></td>
+                       <td><strong>Date Created</strong></td>
+                       <td><strong>Created By</strong></td>
+                       <td><strong>Actions</strong></td>
+                   </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($categories as $category): ?>
                 <tr>
-                    <td>Category Name</td>
-                    <td>Date Created</td>
-                    <td>Created By</td>
-                    <td>Actions</td>
+                    <td><?php echo $category['name']; ?></td>
+                    <td><?php echo 'not yet available' ?></td>
+                    <td>
+                        <?php
+                        echo date('d-M-Y H:i:s', $category['created_at']);
+                        ?>
+                    </td>
+                    <td><?php echo $category['email'] ?></td>
+                    <td>
+                        <a href="#" title="View deals in category" aria-label="View deals in category" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a>
+                        <a href="#" title="Edit category" aria-label="Edit category" data-pjax="1"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="#" title="Delete category" aria-label="Delete category" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+
+                    </td>
                 </tr>
+
+                <?php  endforeach; ?>
+                </tbody>
             </table>
+            <!-- Let us now output the pagination links-->
+            <?php echo LinkPager::widget([
+                'pagination' => $pages,
+            ]); ?>
         </div>
 
     </div>
