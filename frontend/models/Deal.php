@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\web\UploadedFile;
 /**
  * This is the model class for table "deal".
  *
@@ -49,6 +50,9 @@ class Deal extends DoneDealModel
     /**
      * @inheritdoc
      */
+
+    public $imageFile;
+
     public static function tableName()
     {
         return 'deal';
@@ -60,11 +64,13 @@ class Deal extends DoneDealModel
     public function rules()
     {
         return [
-            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity', 'created_at', 'updated_at','merchant_id'], 'required'],
+            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity','merchant_id','highlight','fine_print','details'], 'required'],
             [['start_date', 'end_date'], 'safe'],
             [['value', 'discount', 'merchant_id', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by', 'featured', 'location_id', 'category_id'], 'integer'],
             [['highlight', 'fine_print', 'content', 'details'], 'string'],
-            [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255]
+            [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
+
         ];
     }
 
@@ -80,7 +86,7 @@ class Deal extends DoneDealModel
             'end_date' => 'End Date',
             'value' => 'Value',
             'highlight' => 'Highlight',
-            'discount' => 'Discount',
+            'discount' => 'Discount (Provide %age discount)',
             'merchant_id' => 'Merchant',
             'quantity' => 'Number of Deal Available',
             'purchased' => 'Purchased',
@@ -97,6 +103,7 @@ class Deal extends DoneDealModel
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+            'fine_print' => 'Fine Print',
         ];
     }
 

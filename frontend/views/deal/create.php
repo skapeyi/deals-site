@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use common\models\User;
 use kartik\file\FileInput;
 use frontend\models\Category;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Deal */
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="row">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -73,9 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--                        <p>Upload voucher image here, if you want to customize the voucher per deal.</p>-->
 <!--                    </div>-->
                     <div class="tab-pane" id="tab_e">
-                        <h4>Deal Image Voucher</h4>
                         <?php echo FileInput::widget([
-                            'name' => 'attachment_53',
+                            'name' => 'imageFile',
                             'pluginOptions' => [
                                 'showCaption' => false,
                                 'showRemove' => false,
@@ -93,7 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         </div>
-        <a href="create" class="btn input-block-level form-control btn-primary">Save Deal</a>
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? 'Create Deal' : 'Update Deal', ['class' => $model->isNewRecord ? 'btn input-block-level form-control btn-primary' : 'btn btn-primary']) ?>
+        </div>
+
     </div>
     <div class="col-md-3">
         <div class="panel panel-default">
@@ -140,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="panel-body">
                 <?= $form->field($model,'merchant_id')->widget(Select2::className(),[
-                    'data' => ArrayHelper::map(User::find()->where(['merchant' => [1]])->all(),'user_id','firstname')
+                    'data' => ArrayHelper::map(User::find()->where(['merchant' => [0]])->all(),'id','firstname')
                 ]); ?>
             </div>
 

@@ -29,13 +29,14 @@ class DealController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create'],
+                        'actions' => ['create','index',],
                         'roles' => ['@'],
-                    ]
+                    ],
+
+
                 ],
                 'denyCallback'  => function ($rule, $action) {
                     Yii::$app->session->setFlash('error', 'This section is only for registered users. Please login to continue');
@@ -92,18 +93,49 @@ class DealController extends Controller
         //get all categories to generate the check boxes for the categories
 
 
-
         $model = new Deal();
-        $all_categories = Category::find()->all();
-        //$model->deal_categories = \yii\helpers\ArrayHelper::map($all_categories, 'id', 'name');
 
-
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()))
         {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            if($model->validate())
+            {
+                if($model->save()){
+                    $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+                    Yii::$app->session->setFlash('success','Deal has been posted');
+                    return $this->redirect(['index']);
+                }
+                else{
+                    Yii::$app->session->setFlash('Something went wrong, please try again');
+                }
+
+            }
+            else
+            {
+
+                $errors = $model->errors;
+
+                if($errors != null)
+                {
+
+                    Yii::info($errors, 'dev');
+
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+                else
+                {
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+            }
+
         }
         else
         {
+            Yii::info('we are hereeee','dev');
             return $this->render('create', [
                 'model' => $model,
             ]);
