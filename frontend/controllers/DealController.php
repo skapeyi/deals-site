@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
+use frontend\models\DealImage;
 use Yii;
 use frontend\models\Deal;
-use frontend\models\Order;
 use yii\data\Pagination;
-use frontend\models\search\DealSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use frontend\models\Category;
+
+use yii\web\UploadedFile;
 
 /**
  * DealController implements the CRUD actions for Deal model.
@@ -32,7 +32,7 @@ class DealController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create','index',],
+                        'actions' => ['create','index','image',],
                         'roles' => ['@'],
                     ],
 
@@ -53,15 +53,16 @@ class DealController extends Controller
     public function actionIndex()
     {
         $this -> layout = "admin";
-        $query = Order::find()->where(['status' => 10]);
+        $query = Deal::find()->where(['status' => 10]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
-        $models = $query->offset($pages->offset)
+        $deals = $query->offset($pages->offset)
             ->limit($pages->limit)
+            ->orderBy('id DESC')
             ->all();
 
         return $this->render('index', [
-            'models' => $models,
+            'deals' => $deals,
             'pages' => $pages,
 
         ]);
@@ -97,11 +98,22 @@ class DealController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
+            //$image = UploadedFile::getInstance($model, 'imageFile');
 
             if($model->validate())
             {
+                //convert staart and end date to date time to save to db
+//                $model->start_date = date('Y-m-d H:i:s');
+//                $model->end_date = date('Y-m-d H:i:s');
+
+                $model->end_date = date('Y-m-d H:i:s',strtotime($model->end_date));
+                $model->start_date = date('Y-m-d H:i:s',strtotime($model->start_date));
+
+                Yii::info($model->start_date,'dev');
+                Yii::info($model->end_date,'dev');
+
                 if($model->save()){
-                    $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+
                     Yii::$app->session->setFlash('success','Deal has been posted');
                     return $this->redirect(['index']);
                 }
@@ -135,7 +147,7 @@ class DealController extends Controller
         }
         else
         {
-            Yii::info('we are hereeee','dev');
+
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -191,4 +203,20 @@ class DealController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionImage(){
+        $model = new DealImage();
+
+        if (Yii::$app->request->isPost) {
+            $model->dealImage = UploadedFile::getInstance($model, 'dealImage');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
+            }
+        }
+
+        return $this->render('image', ['model' => $model]);
+    }
+
+
 }

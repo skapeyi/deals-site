@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
@@ -28,29 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-
-                <th>Deal</th>
-                <th>Discout & Price</th>
-                <th>Status</th>
-                <th>Reports</th>
-                <th>Merchant</th>
-                <th>Publish Date</th>
+                <td>Deal</td>
+                <td>Original Price</td>
+                <td>Discount</td>
+                <td>Deal Price</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+                <td>Actions</td>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($models as $deal): ?>
+            <?php foreach ($deals as $deal): ?>
                 <tr>
 
-                    <td><?php echo $user->email; ?></td>
-                    <td><?php echo $user->phone; ?></td>
-                    <td><?php echo $user->firstname; ?></td>
-                    <td><?php echo $user->firstname;?></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $deal->title; ?></td>
+                    <td><?php echo $deal->value; ?></td>
+                    <td><?php echo $deal->discount.'%'?></td>
+                    <td><?php echo $deal->dealprice($deal->value,$deal->discount);?></td>
+                    <td><?php echo date('Y-m-d', strtotime($deal->start_date)); ?></td>
+                    <td><?php echo date('Y-m-d', strtotime($deal->end_date)); ?></td>
+                    <td>
+                        <a href="#" title="Deal Image" aria-label="View or update deal image" data-pjax="0"><span class="glyphicon glyphicon-camera"></span></a>
+                        <a href="#" title="Update Deal " aria-label="Update Deal" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#" title="Deal Statistics" aria-label="View deals statistics" data-pjax="0"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    </td>
                 </tr>
             <?php  endforeach; ?>
             </tbody>
         </table>
+        <?php echo LinkPager::widget([
+            'pagination' => $pages,
+        ]); ?>
 
     </div>
 </div>

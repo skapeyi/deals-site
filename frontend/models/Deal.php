@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\base\Model;
 use yii\web\UploadedFile;
 /**
  * This is the model class for table "deal".
@@ -69,7 +70,7 @@ class Deal extends DoneDealModel
             [['value', 'discount', 'merchant_id', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by', 'featured', 'location_id', 'category_id'], 'integer'],
             [['highlight', 'fine_print', 'content', 'details'], 'string'],
             [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
+            //[['imageFile'], 'file', 'extensions' => 'png, jpg'],
 
         ];
     }
@@ -104,6 +105,7 @@ class Deal extends DoneDealModel
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'fine_print' => 'Fine Print',
+            'location_id' => 'Where to redeem deal'
         ];
     }
 
@@ -157,4 +159,13 @@ class Deal extends DoneDealModel
 
     //holds all the available categories so one can select multiple categories for a deal, used in
     public $deal_categories;
+
+    //we get the deal's value and discount in percentage and return the actual deal price on the website
+    public function dealprice($value,$discount){
+        $dealprice = $value - ($discount/100)*$value;
+        return $dealprice;
+    }
+
 }
+
+

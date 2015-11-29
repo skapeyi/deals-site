@@ -6,7 +6,7 @@ use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use common\models\User;
-use kartik\file\FileInput;
+use frontend\models\Location;
 use frontend\models\Category;
 use yii\helpers\Html;
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="row">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(); ?>
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li><a href="#tab_b" data-toggle="pill">Deal Pricing</a></li>
                     <li><a href="#tab_c" data-toggle="pill">Purchase Limits</a></li>
 <!--                    <li><a href="#tab_d" data-toggle="pill">Voucher</a></li>-->
-                    <li><a href="#tab_e" data-toggle="pill">Deal Image</a></li>
+                    <li><a href="#tab_e" data-toggle="pill">Other Details</a></li>
                 </ul>
                 <div class="tab-content col-md-9">
                     <div class="tab-pane active" id="tab_a">
@@ -74,18 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--                        <p>Upload voucher image here, if you want to customize the voucher per deal.</p>-->
 <!--                    </div>-->
                     <div class="tab-pane" id="tab_e">
-                        <?php echo FileInput::widget([
-                            'name' => 'imageFile',
-                            'pluginOptions' => [
-                                'showCaption' => false,
-                                'showRemove' => false,
-                                'showUpload' => false,
-                                'browseClass' => 'btn btn-primary btn-block',
-                                'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-                                'browseLabel' =>  'Select Photo'
-                            ],
-                            'options' => ['accept' => 'image/*']
-                        ]);?>
+                       <?= $form->field($model,'location_id')->widget(Select2::className(),[
+                           'data' => ArrayHelper::map(Location::find()->all(),'id','name')]); ?>
                     </div>
                 </div><!-- Tab content End -->
 
@@ -104,8 +94,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="panel-title">Deal Timings</h3>
             </div>
             <div class="panel-body">
-                <?= $form->field($model, 'start_date')->widget(\kartik\widgets\DatePicker::className()) ?>
-                <?= $form->field($model, 'end_date')->widget(\kartik\widgets\DatePicker::className()) ?>
+                <?= $form->field($model, 'start_date')->widget(\kartik\widgets\DatePicker::className(),[
+                ]) ?>
+                <?= $form->field($model, 'end_date')->widget(\kartik\widgets\DatePicker::className(),[
+
+                ]) ?>
                 <?= $form->field($model, 'publish_status')->widget(SwitchInput::className(),[
                     'pluginOptions' => [
                         'onColor' => 'success',
