@@ -24,6 +24,7 @@ AppAsset::register($this);
     <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/donedeal.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <?= Html::csrfMetaTags() ?>
+
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>

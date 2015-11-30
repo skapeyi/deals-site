@@ -15,7 +15,7 @@ $this->title = 'DoneDeal - The Best Deals Around Town';
         <h2>2 For 1 Pizza At The Pizza place  </h2>
         <p>2 For 1 Chicken Pizza (50% discount) for a deal price of 23 000UGX instead of 46 000UGX that you SAVE 23 000UGX any day of the week. </p>
         <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
-        <?= Html::img('@web/images/img1.png', ['alt' => 'Pizza']) ?>
+        <?= Html::img('@web/images/img1.png', ['alt' => 'Pizza' , 'class' => 'mg-responsive']) ?>
 
     </div>
     <div class="da-slide">

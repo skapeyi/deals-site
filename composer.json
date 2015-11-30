@@ -30,7 +30,8 @@
         "2amigos/yii2-tinymce-widget" : "*",
         "kartik-v/yii2-mpdf": "*",
         "mickgeek/yii2-daslider": "*",
-        "kartik-v/yii2-icons": "^1.4"
+        "kartik-v/yii2-icons": "^1.4",
+        "yiisoft/yii2-imagine": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

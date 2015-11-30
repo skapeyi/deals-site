@@ -10,8 +10,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 use yii\web\UploadedFile;
+Use yii\imagine\Image;
 
 /**
  * DealController implements the CRUD actions for Deal model.
@@ -98,13 +98,16 @@ class DealController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
-            //$image = UploadedFile::getInstance($model, 'imageFile');
+            $model->dealimage = UploadedFile::getInstance($model, 'dealimage');
+            //need to update imageurl in the database
+
+            $imagelocation = 'images/uploads/'.Yii::$app->security->generateRandomString(5).$model->dealimage->baseName.'.'.$model->dealimage->extension;
+            $model->img_url = $imagelocation;
+
 
             if($model->validate())
             {
-                //convert staart and end date to date time to save to db
-//                $model->start_date = date('Y-m-d H:i:s');
-//                $model->end_date = date('Y-m-d H:i:s');
+              $model->end_date = date('Y-m-d H:i:s');
 
                 $model->end_date = date('Y-m-d H:i:s',strtotime($model->end_date));
                 $model->start_date = date('Y-m-d H:i:s',strtotime($model->start_date));
@@ -113,6 +116,32 @@ class DealController extends Controller
                 Yii::info($model->end_date,'dev');
 
                 if($model->save()){
+                    $model->dealimage->saveAs($imagelocation);
+                    //create thumbnails and other sizes..we need the original path and the path to the thumbnails
+                    $location = explode('.',$imagelocation);
+
+                    //the 281x181 for the front page
+                    $small = $location[0].'small';
+                    // generate a thumbnail image for the front page
+                    Image::thumbnail($imagelocation, 231, 181)
+                        ->save($small.'.'.$location[1], ['quality' => 100]);
+
+                    //the 250x181 for the side bar deal
+                    $medium = $location[0].'medium';
+                    Image::thumbnail($imagelocation, 250, 181)
+                        ->save($medium.'.'.$location[1], ['quality' => 100]);
+
+                    //the 670x414 for the deal page
+                    $large = $location[0].'large';
+                    Image::thumbnail($imagelocation, 670, 414)
+                        ->save($large.'.'.$location[1], ['quality' => 100]);
+
+                    //the 1170x400 for featured deals
+                    $featured= $location[0].'featured';
+                    Image::thumbnail($imagelocation, 1170, 400)
+                        ->save($featured.'.'.$location[1], ['quality' => 100]);
+
+
 
                     Yii::$app->session->setFlash('success','Deal has been posted');
                     return $this->redirect(['index']);
@@ -203,20 +232,5 @@ class DealController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionImage(){
-        $model = new DealImage();
-
-        if (Yii::$app->request->isPost) {
-            $model->dealImage = UploadedFile::getInstance($model, 'dealImage');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
-            }
-        }
-
-        return $this->render('image', ['model' => $model]);
-    }
-
 
 }

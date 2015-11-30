@@ -52,7 +52,7 @@ class Deal extends DoneDealModel
      * @inheritdoc
      */
 
-    public $imageFile;
+    public $dealimage;
 
     public static function tableName()
     {
@@ -70,7 +70,7 @@ class Deal extends DoneDealModel
             [['value', 'discount', 'merchant_id', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by', 'featured', 'location_id', 'category_id'], 'integer'],
             [['highlight', 'fine_print', 'content', 'details'], 'string'],
             [['title', 'img_url', 'voucher_img_url', 'seo_description', 'seo_keywords'], 'string', 'max' => 255],
-            //[['imageFile'], 'file', 'extensions' => 'png, jpg'],
+            [['dealimage'], 'file', 'extensions' => 'png, jpg'],
 
         ];
     }

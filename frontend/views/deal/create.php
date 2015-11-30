@@ -9,6 +9,7 @@ use common\models\User;
 use frontend\models\Location;
 use frontend\models\Category;
 use yii\helpers\Html;
+use kartik\widgets\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Deal */
@@ -20,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="row">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -76,6 +77,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tab-pane" id="tab_e">
                        <?= $form->field($model,'location_id')->widget(Select2::className(),[
                            'data' => ArrayHelper::map(Location::find()->all(),'id','name')]); ?>
+                        <?= $form->field($model,'dealimage')->widget(FileInput::classname(),[
+                           'pluginOptions' => [
+                               'showCaption' => false,
+                               'showRemove' => false,
+                               'showUpload' => false,
+                               'browseClass' => 'btn btn-primary btn-block',
+                               'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                               'browseLabel' =>  'Select Photo'
+                           ],
+                       ]) ?>
                     </div>
                 </div><!-- Tab content End -->
 
