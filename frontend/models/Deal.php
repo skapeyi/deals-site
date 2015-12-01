@@ -65,7 +65,7 @@ class Deal extends DoneDealModel
     public function rules()
     {
         return [
-            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity','merchant_id','highlight','fine_print','details'], 'required'],
+            [['title', 'start_date', 'end_date', 'value', 'discount', 'quantity','merchant_id','highlight','fine_print','details','dealimage'], 'required'],
             [['start_date', 'end_date'], 'safe'],
             [['value', 'discount', 'merchant_id', 'quantity', 'purchased', 'fake_purchased', 'publish_status', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by', 'featured', 'location_id', 'category_id'], 'integer'],
             [['highlight', 'fine_print', 'content', 'details'], 'string'],
