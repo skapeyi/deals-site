@@ -98,6 +98,7 @@ class DealController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
+            Yii::info($model->value.' : value after entering the post','dev');
             $model->dealimage = UploadedFile::getInstance($model, 'dealimage');
             //need to update imageurl in the database
 
@@ -107,6 +108,7 @@ class DealController extends Controller
 
             if($model->validate())
             {
+                Yii::info($model->value.' : value after validating','dev');
               $model->end_date = date('Y-m-d H:i:s');
 
                 $model->end_date = date('Y-m-d H:i:s',strtotime($model->end_date));
@@ -116,6 +118,8 @@ class DealController extends Controller
                 Yii::info($model->end_date,'dev');
 
                 if($model->save()){
+                    Yii::info($model->value.' : value after saving','dev');
+
                     $model->dealimage->saveAs($imagelocation);
                     //create thumbnails and other sizes..we need the original path and the path to the thumbnails
                     $location = explode('.',$imagelocation);

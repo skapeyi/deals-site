@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?php echo $deal->value; ?></td>
                     <td><?php echo $deal->discount.'%'?></td>
                     <td><?php echo $deal->dealprice($deal->value,$deal->discount);?></td>
-                    <td><?php echo date('Y-m-d', strtotime($deal->start_date)); ?></td>
-                    <td><?php echo date('Y-m-d', strtotime($deal->end_date)); ?></td>
+                    <td><?php echo date('d-M-Y', strtotime($deal->start_date)); ?></td>
+                    <td><?php echo date('d-M-Y', strtotime($deal->end_date)); ?></td>
                     <td>
                         <a href="#" title="Deal Image" aria-label="View or update deal image" data-pjax="0"><span class="glyphicon glyphicon-camera"></span></a>
                         <a href="#" title="Update Deal " aria-label="Update Deal" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
