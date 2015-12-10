@@ -77,8 +77,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        //        $deals = (new \yii\db\Query())->select(['deal.id', 'deal.title', 'deal.value','deal.discount','deal.img_url','category.name'])->from('deal')->innerJoin('category','deal.category_id=category.id')->groupBy('category.name') ->all();
-//        Yii::info($deals,'dev');
+        //we need to get the featured deals
+
+        $featured = (new \yii\db\Query())->select(['title','deal.highlight as highlight','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'featured' => 1])->leftJoin('location','deal.location_id = location.id')->all();
+        Yii::info($featured,'dev');
+
 
         //first pick the categories
         $categories = (new \yii\db\Query())->select(['id', 'name'])->from('category')->where(['status' => '10'])->orderBy('name ASC')->all();
@@ -92,7 +95,7 @@ class SiteController extends Controller
        for($x = 0; $x < $categories_number; $x++)
        {
            $deal_category = $categories[$keys[$x]];
-           $category_deals = (new \yii\db\Query())->select(['title','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'category_id' => $deal_category['id']])->leftJoin('location','deal.location_id = location.id')->all();
+           $category_deals = (new \yii\db\Query())->select(['title','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'category_id' => $deal_category['id'],'publish_status' => 1])->leftJoin('location','deal.location_id = location.id')->all();
 
            $categories[$x]['deals'] = $category_deals;
 
@@ -101,6 +104,7 @@ class SiteController extends Controller
         //then we pass the data to the view for displaying
         return $this->render('index',[
             'categories' => $categories,
+            'featured' => $featured
         ]);
     }
 

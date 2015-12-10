@@ -12,20 +12,20 @@ $this->title = 'DoneDeal - The Best Deals Around Town';
     <?php DaSlider::begin([
         'clientOptions' => ['bgincrement' => 10, 'interval' => 10000],
     ]); ?>
-    <div class="da-slide">
-        <h2>2 For 1 Pizza At The Pizza place  </h2>
-        <p>2 For 1 Chicken Pizza (50% discount) for a deal price of 23 000UGX instead of 46 000UGX that you SAVE 23 000UGX any day of the week. </p>
-        <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
-        <?= Html::img('@web/images/img1.png', ['alt' => 'Pizza' , 'class' => 'mg-responsive']) ?>
+   <?php foreach($featured as $featured_deal):?>
+       <div class="da-slide">
+           <h2 class="featured_content" > <?php echo $featured_deal['title'];?> </h2>
+           <p class="featured_content" ><?php echo $featured_deal['highlight'];?></p>
+           <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
+           <?php
+           $split_url_featured = explode(".",$featured_deal['img_url']);
+           $featured_image = '@web/'.$split_url_featured[0].'featured.'.$split_url_featured[1];
 
-    </div>
-    <div class="da-slide">
-        <h2> Aromatherapy Massage (33% Discount) </h2>
-        <p>33% Discount of an Aromatherapy Massage at a deal price of 40 000UGX instead of 60 000UGX (SAVE 20 000UGX) </p>
-        <?= Html::a('Get Deal', '#', ['class' => 'da-link btn btn-success btn-lg']) ?>
-        <?= Html::img('@web/images/massage.png', ['alt' => 'Massage']) ?>
+           ?>
+           <?= Html::img($featured_image, ['alt' => 'Massage']) ?>
 
-    </div>
+       </div>
+    <?php endforeach;?>
 
     <?php DaSlider::end(); ?>
 
@@ -44,7 +44,7 @@ $this->title = 'DoneDeal - The Best Deals Around Town';
                                 <?php
                                 // i need to split the image url and get the small deal images url
                                 $split_url = explode(".",$deal['img_url']);
-                                Yii::info($split_url,'dev');
+
 
                                 echo Html::img('@web/'.$split_url[0].'small.'.$split_url[1],['class' => 'small-deal-image'])
                                 ?>

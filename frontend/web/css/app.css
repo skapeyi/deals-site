@@ -133,3 +133,11 @@ body{
 .btn-primary:not(.btn-link):not(.btn-flat):hover{
     background-color: #261426;
 }
+.featured_content{
+    background: #636;
+    padding-left: 10px !important;
+}
+.da-slide .da-link {
+    background: #636 !important;
+    border-color: #636 !important;
+}
