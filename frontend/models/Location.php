@@ -18,7 +18,7 @@ use Yii;
  * @property User $createdBy
  * @property User $updatedBy
  */
-class Location extends \yii\db\ActiveRecord
+class Location extends DoneDealModel
 {
     /**
      * @inheritdoc
@@ -34,7 +34,7 @@ class Location extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'required'],
+            [['name'], 'required'],
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255]
         ];

@@ -53,12 +53,12 @@ AppAsset::register($this);
                                     //['label' => "Add Deal", 'icon' => 'plus', 'url' =>['deal/create']],
                                     ['label' => "Deals", 'icon' => 'eye-open', 'url' => ['deal/index']],
                                     ['label' => "Deal Categories", 'icon' => 'eye-open', 'url' => ['category/index']],
+                                    ['label' => "Deal Locations", 'icon' => 'pushpin', 'url' => ['location/index']],
                                     ['label' => "Merchants", 'icon' => 'eye-open', 'url' => ['admin/merchant']],
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
                                     ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],
                                     ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/index']],
                                 ]
-
                             ],
                             [
                                 'url' => ['user/voucher'],

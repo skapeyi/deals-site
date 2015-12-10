@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $username
  * @property string $auth_key
  * @property string $password_hash
  * @property string $firstname
@@ -68,7 +67,7 @@ class User extends DoneDealModel
             [['phone', 'auth_key', 'password_hash', 'email'], 'required'],
             [['merchant', 'last_login', 'email_notifications', 'sms_notification', 'news_letter', 'new_deal', 'deal_failed', 'deal_purchase', 'voucher_activated', 'status', 'source', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['dob'], 'safe'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'home_address', 'home_address_1', 'country', 'city'], 'string', 'max' => 255],
+            [[ 'password_hash', 'password_reset_token', 'email', 'home_address', 'home_address_1', 'country', 'city'], 'string', 'max' => 255],
             [['auth_key', 'firstname', 'lastname'], 'string', 'max' => 32],
             [['avatar_url', 'url'], 'string', 'max' => 64],
             [['phone'], 'string', 'max' => 12],
@@ -83,7 +82,6 @@ class User extends DoneDealModel
     {
         return [
             'id' => 'ID',
-            'username' => 'User Name',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'firstname' => 'First Name',

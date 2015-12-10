@@ -114,9 +114,6 @@ class DealController extends Controller
                 $model->end_date = date('Y-m-d H:i:s',strtotime($model->end_date));
                 $model->start_date = date('Y-m-d H:i:s',strtotime($model->start_date));
 
-                Yii::info($model->start_date,'dev');
-                Yii::info($model->end_date,'dev');
-
                 if($model->save()){
                     Yii::info($model->value.' : value after saving','dev');
 

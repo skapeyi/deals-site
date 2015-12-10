@@ -32,12 +32,13 @@ class LocationController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new LocationSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $this->layout ="admin";
+        $locations = (new \yii\db\Query())->select(['location.id','location.name','location.created_at','user.email as created_by'])->from('location')->innerJoin('user','location.created_by = user.id')->all();
+        Yii::info($locations,'dev');
+
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'locations' => $locations,
         ]);
     }
 
@@ -63,9 +64,9 @@ class LocationController extends Controller
         $model = new Location();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }

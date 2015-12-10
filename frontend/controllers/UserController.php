@@ -246,6 +246,8 @@ class UserController extends Controller
                 $current_user->city = $params['city'];
                 $current_user->dob = $params['dob'];
 
+                $current_user->dob = date('Y-m-d H:i:s',strtotime($current_user->dob));
+
                 if($current_user->save())
                 {
                    Yii::$app->getSession()->setFlash('success','Profile successfully updated');

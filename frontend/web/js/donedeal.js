@@ -24,5 +24,12 @@ $(document).ready(function(){
             .load($(this).attr('value'));
     });
 
+    //    locationmodal
+    $('#locationModalButton').click(function(){
+        $('#locationModal').modal('show')
+            .find('#locationModalContent')
+            .load($(this).attr('value'));
+    });
+
 
 });

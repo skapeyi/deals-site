@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\User1;
+use frontend\models\Category;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -14,6 +15,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\authclient\OAuth2;
+
+
 
 
 /**
@@ -74,7 +77,31 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        //        $deals = (new \yii\db\Query())->select(['deal.id', 'deal.title', 'deal.value','deal.discount','deal.img_url','category.name'])->from('deal')->innerJoin('category','deal.category_id=category.id')->groupBy('category.name') ->all();
+//        Yii::info($deals,'dev');
+
+        //first pick the categories
+        $categories = (new \yii\db\Query())->select(['id', 'name'])->from('category')->where(['status' => '10'])->orderBy('name ASC')->all();
+        $categories_number = (new \yii\db\Query())->select(['id', 'name'])->from('category')->where(['status' => '10'])->count();
+
+
+        //we need to access the array by its keys so, we generate the keys
+        $keys = array_keys($categories);
+
+        //then for each category pick the deals in the category
+       for($x = 0; $x < $categories_number; $x++)
+       {
+           $deal_category = $categories[$keys[$x]];
+           $category_deals = (new \yii\db\Query())->select(['title','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'category_id' => $deal_category['id']])->leftJoin('location','deal.location_id = location.id')->all();
+
+           $categories[$x]['deals'] = $category_deals;
+
+       }
+
+        //then we pass the data to the view for displaying
+        return $this->render('index',[
+            'categories' => $categories,
+        ]);
     }
 
     public function actionLogin()
@@ -251,17 +278,20 @@ class SiteController extends Controller
         Yii::info($new_user->errors, 'debug');
         //$this->redirect(['user/preference']);
     }
+
     public function actionDeal()
     {
         return $this->render('deal');
 
     }
+
     public function actionVoucher(){
         $this->layout = 'pdf';
         $pdf = Yii::$app->pdf;
         $pdf->content = $this->render('voucher');
         return $pdf->render();
     }
+
     public function actionVouch(){
         return $this->render('voucher');
     }

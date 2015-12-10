@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="location-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4>Add New Merchant Location</h4>
 
     <?= $this->render('_form', [
         'model' => $model,
