@@ -37,7 +37,7 @@ class DealController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['create','index','image'],
+                        'actions' => ['create','index','image','view'],
                         'roles' => ['@'],
                     ],
 
