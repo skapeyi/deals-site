@@ -78,8 +78,10 @@ class DealController extends Controller
      */
     public function actionView($id)
     {
+        $deal = Deal::findOne($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'deal' => $deal,
         ]);
     }
 
