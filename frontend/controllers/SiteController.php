@@ -230,6 +230,7 @@ class SiteController extends Controller
     public function oAuthSuccess($client) {
         // get user data from client
         $userAttributes = $client->getUserAttributes();
+        Yii::info($userAttributes,'dev');
 
         // we get the email sent back and check if the email is in the db we have, and if we don't we create a new account
         //else, we log the user in
@@ -249,8 +250,10 @@ class SiteController extends Controller
         {
             //create a new user
             $new_user = new User1();
-            $new_user->firstname = $userAttributes["first_name"];
-            $new_user->lastname = $userAttributes["last_name"];
+//            $new_user->firstname = $userAttributes["first_name"];
+//            $new_user->lastname = $userAttributes["last_name"];
+            $new_user->firstname = $userAttributes["name"];
+            $new_user->lastname = $userAttributes["name"];
             $new_user->email = $userAttributes["email"];
             $new_user->password_hash = Yii::$app->security->generatePasswordHash($userAttributes["email"]);
             $new_user->generateAuthKey();
