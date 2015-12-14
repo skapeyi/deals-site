@@ -31,8 +31,13 @@ class DealController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['view'],
                         'allow' => true,
-                        'actions' => ['create','index','image','view',],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create','index','image'],
                         'roles' => ['@'],
                     ],
 
