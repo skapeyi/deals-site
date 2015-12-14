@@ -79,7 +79,7 @@ class SiteController extends Controller
     {
         //we need to get the featured deals
 
-        $featured = (new \yii\db\Query())->select(['title','deal.highlight as highlight','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'featured' => 1])->leftJoin('location','deal.location_id = location.id')->all();
+        $featured = (new \yii\db\Query())->select(['deal.id','title','deal.highlight as highlight','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'featured' => 1])->leftJoin('location','deal.location_id = location.id')->all();
         Yii::info($featured,'dev');
 
 
@@ -95,7 +95,7 @@ class SiteController extends Controller
        for($x = 0; $x < $categories_number; $x++)
        {
            $deal_category = $categories[$keys[$x]];
-           $category_deals = (new \yii\db\Query())->select(['title','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'category_id' => $deal_category['id'],'publish_status' => 1])->leftJoin('location','deal.location_id = location.id')->all();
+           $category_deals = (new \yii\db\Query())->select(['deal.id','title','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'category_id' => $deal_category['id'],'publish_status' => 1])->leftJoin('location','deal.location_id = location.id')->all();
 
            $categories[$x]['deals'] = $category_deals;
 

@@ -32,7 +32,7 @@ class DealController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create','index','image',],
+                        'actions' => ['create','index','image','view',],
                         'roles' => ['@'],
                     ],
 
