@@ -17,7 +17,7 @@ $this->title = 'DoneDeal - The Best Deals Around Town';
        <div class="da-slide">
            <h2 class="featured_content" > <?php echo $featured_deal['title'];?> </h2>
            <p class="featured_content" ><?php echo $featured_deal['highlight'];?></p>
-           <?= Html::a('Get Deal', ['/deal/view', 'id' => $featured_deal['id']], ['class' => 'da-link btn btn-success btn-lg']) ?>
+           <?= Html::a('Deal details', ['/deal/view', 'id' => $featured_deal['id']], ['class' => 'da-link btn btn-success btn-lg']) ?>
            <?php
            $split_url_featured = explode(".",$featured_deal['img_url']);
            $featured_image = '@web/'.$split_url_featured[0].'featured.'.$split_url_featured[1];
