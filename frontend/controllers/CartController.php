@@ -80,9 +80,9 @@ class CartController extends Controller{
         return $total + $new_item;
     }
 
-    public function actionEditquantity($id,$quantity)
+    public function actionCheckout()
     {
-
+        return $this->render('checkout');
     }
 
 } 
