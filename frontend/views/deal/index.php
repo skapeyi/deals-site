@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach ($deals as $deal): ?>
                 <tr>
 
-                    <td><?php echo $deal->title; ?></td>
+
                     <td><?php echo $deal->value; ?></td>
                     <td><?php echo $deal->discount.'%'?></td>
                     <td><?php echo $deal->dealprice($deal->value,$deal->discount);?></td>

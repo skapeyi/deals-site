@@ -34,7 +34,7 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['info'],
-                    'categories' => ['dev'],
+                    'categories' => ['debug'],
                     'logFile' => '@app/runtime/logs/debug.log',
                     'logVars' => [null], ///turns off $_SERVER AND ALLL THAT JAZZ IN THE REQUEST IN THE LOGS
                 ],

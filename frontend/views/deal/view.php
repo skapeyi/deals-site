@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-$this->title = 'Deal Name';
+$this->title = $deal->title.' | DoneDeal';
 ?>
 <div class="row">
     <div class="panel panel-default">
@@ -13,7 +13,8 @@ $this->title = 'Deal Name';
                     <h3><strong><?= $deal->title; ?></strong></h3>
                     <h4 class="big-deal-original-price"><strike><strike>UGX <?= $deal->value ;?></strike></strike></h4>
                     <h2><strong>UGX <?php $current_price = $deal->dealprice($deal->value, $deal->discount); echo $current_price ?></strong></h2>
-                    <a href="#"><button type="button" class="btn btn-primary btn-lg btn-get-deal"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Get Deal</button></a>
+
+                    <?= Html::a('<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Get Deal', ['cart/addtocart', 'id' => $deal->id,'price' => $current_price,'name' => $deal->title,'quantity' => 1], ['class' => 'btn btn-primary btn-lg btn-get-deal']) ?>
                     <hr class="clear-float">
                     <h5 class="float-left">Discount</h5>
                     <h5 class="float-left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You Save</h5>

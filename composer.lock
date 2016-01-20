@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4cd5cdf98079bd90421f213bb76e43a2",
-    "content-hash": "2be76e9f4eb70261099c07c5d48e9e6e",
+    "hash": "4fb2b47d00d03b521960f704e0138891",
+    "content-hash": "6e9895b96bbb22d062b2ffccbfffcc90",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -650,7 +650,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/dbc8d1b9b67daaab357bcc41dbf549c3684cf5f1",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/fddd2c240452e6c8990c4ef75e0265b455aa7968",
                 "reference": "dbc8d1b9b67daaab357bcc41dbf549c3684cf5f1",
                 "shasum": ""
             },
@@ -2137,6 +2137,44 @@
                 "yii2"
             ],
             "time": "2014-08-16 09:03:11"
+        },
+        {
+            "name": "omnilight/yii2-shopping-cart",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omnilight/yii2-shopping-cart.git",
+                "reference": "76f785e278f403fbac6b1b59d8d15d83345533d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omnilight/yii2-shopping-cart/zipball/76f785e278f403fbac6b1b59d8d15d83345533d5",
+                "reference": "76f785e278f403fbac6b1b59d8d15d83345533d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yz\\shoppingcart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Pavel Agalecky",
+                    "email": "pavel.agalecky@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension that adds shopping cart functions",
+            "keywords": [
+                "shopping cart",
+                "yii"
+            ],
+            "time": "2015-09-08 11:18:44"
         },
         {
             "name": "romdim/yii2-bootstrap-material",

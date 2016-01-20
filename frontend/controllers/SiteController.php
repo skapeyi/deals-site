@@ -80,7 +80,7 @@ class SiteController extends Controller
         //we need to get the featured deals
 
         $featured = (new \yii\db\Query())->select(['deal.id','title','deal.highlight as highlight','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10,'featured' => 1])->leftJoin('location','deal.location_id = location.id')->all();
-        Yii::info($featured,'dev');
+        //Yii::info($featured,'dev');
 
 
         //first pick the categories
@@ -163,14 +163,14 @@ class SiteController extends Controller
                 Yii::$app->mailer->compose(['html' => 'adminSignupemail-html', 'text' => 'adminSignupemail-text'], ['user' => $user])
                     ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' Support'])
                     ->setTo('developer@donedeal.ug')
-                    ->setSubject('Password reset for ' . \Yii::$app->name)
+                    ->setSubject('New user sign up for ' . \Yii::$app->name)
                     ->send();
 
                 //send email to user
                 Yii::$app->mailer->compose(['html' => 'userSignupemail-html', 'text' => 'userSignupemail-text'], ['user' => $user])
                     ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' Support'])
                     ->setTo($user->email)
-                    ->setSubject('Password reset for ' . \Yii::$app->name)
+                    ->setSubject('Account created at ' . \Yii::$app->name)
                     ->send();
 
                 //then login the user
