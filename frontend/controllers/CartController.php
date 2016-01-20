@@ -35,7 +35,7 @@ class CartController extends Controller{
     }
 
     //we are going to keep passing the deal id to this method and add it to the session
-    public function actionAddtocart($id,$price,$name){
+    public function actionAddtocart($id,$price,$name, $quantity){
         $session = Yii::$app->session;
        //$session->remove('cart');
         if($session->has('cart')) //if the session is there, we need to add to it
@@ -44,7 +44,8 @@ class CartController extends Controller{
             $item =  [
                 'id' => $id,
                 'price' => $price,
-                'name' => $name
+                'name' => $name,
+                'quantity' => $quantity
 
             ];
             $session['cart'] = array_merge($session['cart'],[$item]);
@@ -58,28 +59,30 @@ class CartController extends Controller{
             $item = [
                 'id' => $id,
                 'price' => $price,
-                'name' => $name
+                'name' => $name,
+                'quantity' => $quantity
             ];
             $session['cart'] = array_merge($session['cart'],[$item]);
         }
-
-        //get the cart and get the ids for the deals to get the quantity and prices for each deal
-       // $session->remove('cart');
-        $items = $session['cart'];
-        //Yii::info($cart_items,'debug');
-//        $x = [];
-//        foreach($cart_items as $cart_item){
-//
-//          // Yii::info($cart_item['id'],'debug');
-//            array_push($x,$cart_item['id']);
-//        }
-//
-//       // $items = (new \yii\db\Query()) ->select(['id','title','value']);
 
 
 
         //go to the users' cart page
         $this->redirect(['cart/index']);
+    }
+
+    public static  function calculatePrice($quantity, $price)
+    {
+        return $quantity * $price;
+    }
+
+    public static function sumCart($total,$new_item){
+        return $total + $new_item;
+    }
+
+    public function actionEditquantity($id,$quantity)
+    {
+
     }
 
 } 

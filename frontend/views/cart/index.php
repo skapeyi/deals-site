@@ -1,4 +1,6 @@
 <?php
+use frontend\controllers\CartController;
+use yii\helpers\Html;
 /**
  * Created by PhpStorm.
  * User: Samson
@@ -30,11 +32,25 @@ $this->title = 'Cart | '.Yii::$app->name;
                     </tr>
                     </thead>
                     <tbody>
-                    <?php Yii::info($items,'debug'); foreach($items as $item) : ?>
+                    <?php
+                    //initialize the total sum
+                        $cart_total = 0;
+                        $cart_index = 0;
 
+
+                        foreach($items as $item) :
+                            ?>
+                            <?php
+                                $item_cost = CartController::CalculatePrice($item['price'],$item['quantity']);
+                                $cart_total = CartController::sumCart($cart_total, $item_cost);
+
+                            ?>
                     <tr>
                         <td><?=  $item['name']?></td>
-                        <td><select><option value="">Select</option><option selected="selected" value="1">1</option>
+                        <td>
+                            <select <?php $select_item_index =  'id = cartindex'.$cart_index; echo $select_item_index;?> onchange="quantityselectionchanged(this.id, this.value)">
+                                <option value="">Select</option>
+                                <option selected="selected" value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
@@ -54,21 +70,25 @@ $this->title = 'Cart | '.Yii::$app->name;
                                 <option value="18">18</option>
                                 <option value="19">19</option>
                                 <option value="20">20</option>
-                            </select></td>
-                        <td class="currency"><?= $item['price']?></td>
-                        <td class="currency">20000</td>
+                            </select>
+                        </td>
+                        <td class="currency" <?php $select_item_index =  'id = cartindexprice'.$cart_index; echo $select_item_index;?>><?= $item['price']?></td>
+                        <td class="currency"<?php $select_item_index =  'id = cartindextotal'.$cart_index; echo $select_item_index;?>><?= $item_cost?></td>
                         <td class="currency"> <span class="glyphicon glyphicon-trash"></span></td>
                     </tr>
+                            <?php $cart_index++ ;?>
                     <?php endforeach;?>
                     </tbody>
                     <tfoot>
-                    <tr class="visible-xs">
-                        <td class="text-center"><strong>Total UGX 60000</strong></td>
-                    </tr>
+<!--                    <tr class="visible-xs">-->
+<!--                        <td class="text-center" id=""><strong>Total UGX --><?//= $cart_total ?><!--</strong></td>-->
+<!--                    </tr>-->
                     <tr>
-                        <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                        <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total UGX 60000</strong></td>
+                        <td>
+                            <?= Html::a('<i class="fa fa-angle-left"></i> Continue Shopping', ['site/index'], ['class' => 'btn btn-warning']) ?>
+
+                        <td colspan="2" class="" style="text-align: right;"><strong>Total UGX</strong></td>
+                        <td class=" text-center" id="cart_total"><strong> <?= $cart_total ?></strong></td>
                         <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                     </tr>
                     </tfoot>
