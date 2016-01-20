@@ -16,6 +16,8 @@ $this->title = 'Cart | '.Yii::$app->name;
         <div class="panel-body">
             <?php if(is_null($items)): ?>
                 <h3>Your Cart </h3>
+<!--                Leave line below here...other wise the function that posts our data to the checkout function will complain and throw an error-->
+                <?php $items_in_cart = 0?>
                 <div class="jumbotron">
                     <h4>You have no items in the cart</h4>
                 </div>
@@ -24,6 +26,7 @@ $this->title = 'Cart | '.Yii::$app->name;
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                     <tr>
+                        <th class="deal-id-hiddenf"></th>
                         <th>Deal</th>
                         <th>Quantity</th>
                         <th class="align-right">Unit Price (UGX)</th>
@@ -37,15 +40,22 @@ $this->title = 'Cart | '.Yii::$app->name;
                         $cart_total = 0;
                         $cart_index = 0;
 
+                        $items_in_cart = count($items);
 
+
+
+                       // Yii::info(print_r($items),'debug');
                         foreach($items as $item) :
                             ?>
+
                             <?php
+                                Yii::info($item,'debug');
                                 $item_cost = CartController::CalculatePrice($item['price'],$item['quantity']);
                                 $cart_total = CartController::sumCart($cart_total, $item_cost);
 
                             ?>
                     <tr>
+                        <td class="deal-id-hidden" id="cartindexid<?= $cart_index?>"><?= $item['id']?></td>
                         <td><?=  $item['name']?></td>
                         <td>
                             <select <?php $select_item_index =  'id = cartindex'.$cart_index; echo $select_item_index;?> onchange="quantityselectionchanged(this.id, this.value)">
@@ -89,7 +99,8 @@ $this->title = 'Cart | '.Yii::$app->name;
 
                         <td colspan="2" class="" style="text-align: right;"><strong>Total UGX</strong></td>
                         <td class=" text-center" id="cart_total"><strong> <?= $cart_total ?></strong></td>
-                        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                        <td><a onclick="send_cart_total()
+                        " href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -99,4 +110,9 @@ $this->title = 'Cart | '.Yii::$app->name;
     </div>
 
 </div>
+<script>
+    function send_cart_total(){
+       checkout(<?= $items_in_cart; ?>);
+    }
+</script>
 

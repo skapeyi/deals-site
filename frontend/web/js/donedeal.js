@@ -1,6 +1,8 @@
 /**
  * Created by Sammie on 8/10/2015.
  */
+
+
 $(document).ready(function(){
 
 //    the modal for adding a new category on category/index
@@ -36,9 +38,7 @@ $(document).ready(function(){
 
 
 function quantityselectionchanged(id,quantity){
-
     //calculate the total for the new item which the user has selected
-
     var cart_index = id.slice(-1);
     var previous_item_total = document.getElementById('cartindextotal'+cart_index).textContent;
     var unit_price = document.getElementById('cartindexprice'+cart_index).textContent;
@@ -54,6 +54,51 @@ function quantityselectionchanged(id,quantity){
     var new_total = prev_total - previous_item_total + new_item_price;
     console.log(new_total);
     document.getElementById('cart_total').textContent = new_total;
+}
 
+// we need to read the data from the cart page and post it to a controller that is going to then create the orders and
+// i want to post json to the controller
+
+function checkout(cartsize){
+
+    // need to create a json object to pass to a function that is going to create orders and a payment item in the databases..remember we need diff vouchers for each item in the cart i.e if the cart has a message deal with quantity two, that means, those are two vouchers, thus two orders in the database
+
+    order = [];
+    for(i = 0;i<cartsize;i++ ){
+        //construct jason object
+        id =  document.getElementById('cartindexid' + i).textContent;
+        e = document.getElementById('cartindex' + i);
+        quantity = e.options[e.selectedIndex].value;
+        unit = document.getElementById('cartindexprice' + i).textContent;
+        total = document.getElementById('cartindextotal' + i).textContent;
+
+        item = {
+            id : id,
+            quantity: quantity,
+            unit_price: unit,
+            total_price : total
+        }
+        order.push(item)
+    }
+    console.log(order);
+
+    //now that we have the order object, we need push to the page to select phone number and process payment
+    //$.post({
+    //    url: 'checkout',
+    //    type: 'post',
+    //    data: order
+    //}
+    //
+    //);
+
+    $.ajax({
+        url: 'checkout',
+        type: 'post',
+        data: order,
+        success: function(){
+            window.location.href = 'checkout';
+        }
+
+    });
 
 }

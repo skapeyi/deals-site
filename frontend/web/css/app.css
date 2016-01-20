@@ -141,3 +141,6 @@ body{
     background: #636 !important;
     border-color: #636 !important;
 }
+.deal-id-hidden{
+    display: none;
+}
