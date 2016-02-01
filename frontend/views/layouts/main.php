@@ -44,11 +44,13 @@ AppAsset::register($this);
 
             ];
             if (Yii::$app->user->isGuest) {
+                $menuItems[] =  Html::button(Icon::show('shopping-cart').'Cart',['value' => Url::to(['/cart/index']),'class'=>'btn btn-primary btn-sm','data-toggle' =>'tooltip','title' => 'Cart' ]);
                 $menuItems[] =  Html::button(Icon::show('sign-in').'Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-                -                $menuItems[] = Html::button(Icon::show('user').'Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+                $menuItems[] = Html::button(Icon::show('user').'Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
             }
             else
             {
+                $menuItems[] =  Html::button(Icon::show('shopping-cart').'Cart',['value' => Url::to(['/cart/index']),'class'=>'btn btn-primary btn-sm','data-toggle' =>'tooltip','title' => 'Cart' ]);
                 $menuItems[] = ['label' => Icon::show('user').'Account', 'url' => ['/user/dashboard']];
                 $menuItems[] = [
                     'label' => Icon::show('sign-out').' Logout (' . Yii::$app->user->identity->email . ')',

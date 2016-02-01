@@ -1,6 +1,9 @@
 <?php
 use frontend\controllers\CartController;
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use kartik\icons\Icon;
+Icon::map($this);
 /**
  * Created by PhpStorm.
  * User: Samson
@@ -23,6 +26,7 @@ $this->title = 'Cart | '.Yii::$app->name;
                 </div>
 
             <?php else : ?>
+                <?php $form = ActiveForm::begin(['id' => 'checkout-form']); ?>
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                     <tr>
@@ -44,6 +48,8 @@ $this->title = 'Cart | '.Yii::$app->name;
 
 
 
+
+
                        // Yii::info(print_r($items),'debug');
                         foreach($items as $item) :
                             ?>
@@ -54,7 +60,8 @@ $this->title = 'Cart | '.Yii::$app->name;
                                 $cart_total = CartController::sumCart($cart_total, $item_cost);
 
                             ?>
-                    <tr>
+                            <input id="cartsize" type="hidden"  value="<?= $items_in_cart?>">
+                            <tr>
                         <td class="deal-id-hidden" id="cartindexid<?= $cart_index?>"><?= $item['id']?></td>
                         <td><?=  $item['name']?></td>
                         <td>
@@ -95,15 +102,47 @@ $this->title = 'Cart | '.Yii::$app->name;
 <!--                    </tr>-->
                     <tr>
                         <td>
-                            <?= Html::a('<i class="fa fa-angle-left"></i> Continue Shopping', ['site/index'], ['class' => 'btn btn-warning']) ?>
+<!--                            -->
 
                         <td colspan="2" class="" style="text-align: right;"><strong>Total UGX</strong></td>
                         <td class=" text-center" id="cart_total"><strong> <?= $cart_total ?></strong></td>
-                        <td><a onclick="send_cart_total()
-                        " href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+<!--                        <td><a onclick="send_cart_total()-->
+<!--                        " href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>-->
+<!--                        <td> </td>-->
                     </tr>
                     </tfoot>
                 </table>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'method')->dropDownList(
+                            ['offline_payment' => 'Offline payment','mtn_mobilemoney' => 'MTN MobileMoney','airtel_money'=>'Airtel Money'],           // Flat array ('id'=>'label')
+                            ['prompt'=>'Select payment option']    // options
+                        ); ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'phone') ?>
+                    </div>
+                </div>
+
+                <div style="color:#999;margin:1em 0">
+                    By clicking checkout, you agree to <?= Html::a('Terms and conditions',['#'])?> and the <?= Html::a('Privacy policy',['#'])?>
+                </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <?= Html::a('<i class="fa fa-angle-left"></i> Continue Shopping', ['site/index'], ['class' => 'btn btn-warning']) ?>
+                    </div>
+
+                <div class="col-md-6 pull-right">
+                    <div class="form-group">
+                        <?= Html::submitButton(Icon::show('cart').'Checkout', ['class' => 'btn btn-primary checkout_btn', 'name' => 'checkout-button', ]) ?>
+                        </div>
+
+                    </div>
+            </div>
+
+                <?php ActiveForm::end(); ?>
             <?php endif;?>
 
         </div>
