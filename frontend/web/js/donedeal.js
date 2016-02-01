@@ -34,6 +34,54 @@ $(document).ready(function(){
     });
 
 
+    $('.checkout_btn').on('click', function(event){
+        var phone_number = document.getElementById('checkoutform-phone').value;
+        console.log(phone_number);
+        var payment_method = document.getElementById('checkoutform-method').value;
+        if( !phone_number || !payment_method )
+        {
+            alert('Please check phone number or payment method');
+
+        }
+        else
+        {
+
+            var cartsize = document.getElementById('cartsize').value;
+
+            order = [];
+            for(i = 0;i<cartsize;i++ ){
+                //construct jason object
+                id =  document.getElementById('cartindexid' + i).textContent;
+                e = document.getElementById('cartindex' + i);
+                quantity = e.options[e.selectedIndex].value;
+                unit = document.getElementById('cartindexprice' + i).textContent;
+                total = document.getElementById('cartindextotal' + i).textContent;
+
+                item = {
+                    id : id,
+                    quantity: quantity,
+                    unit_price: unit,
+                    total_price : total
+                }
+                order.push(item)
+            }
+
+            //go to the next page
+            $.ajax({
+                url: 'checkout',
+                type: 'post',
+                data: order,
+                success: function(html){
+                    console.log(html);
+                }
+
+            });
+
+
+        }
+    });
+
+
 });
 
 

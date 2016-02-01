@@ -14,11 +14,42 @@ use frontend\models\search\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\data\Pagination;
 use frontend\models\Deal;
-
+use frontend\models\CheckoutForm;
 
 class CartController extends Controller{
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup',],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout',],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+
     public function actionIndex(){
         $this->layout = "main";
         // we need to redirect to this page and get the deals in the cart and display them
@@ -28,14 +59,18 @@ class CartController extends Controller{
 
         $items = $session['cart'];
 
+        $model = new CheckoutForm();
+
 
         return $this->render('index',[
-            'items' => $items
+            'items' => $items,
+            'model' => $model
         ]);
     }
 
     //we are going to keep passing the deal id to this method and add it to the session
-    public function actionAddtocart($id,$price,$name, $quantity){
+    public function actionAddtocart($id,$price,$name, $quantity)
+    {
         $session = Yii::$app->session;
        //$session->remove('cart');
         if($session->has('cart')) //if the session is there, we need to add to it
@@ -64,25 +99,34 @@ class CartController extends Controller{
             ];
             $session['cart'] = array_merge($session['cart'],[$item]);
         }
-
-
-
         //go to the users' cart page
         $this->redirect(['cart/index']);
     }
+
 
     public static  function calculatePrice($quantity, $price)
     {
         return $quantity * $price;
     }
 
-    public static function sumCart($total,$new_item){
+
+    public static function sumCart($total,$new_item)
+    {
         return $total + $new_item;
     }
 
+
     public function actionCheckout()
     {
-        return $this->render('checkout');
+        $request = Yii::$app->request;
+        if($request->isAjax)
+        {
+            Yii::$app->session->setFlash('success','got the request');
+            return $this->renderAjax('checkout');
+        }
+
+
+
     }
 
 } 
