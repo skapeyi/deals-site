@@ -3,16 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Payment;
-use frontend\models\search\Payment as PaymentSearch;
+use frontend\models\Voucher;
+use frontend\models\search\Voucher as VoucherSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
- * PaymentController implements the CRUD actions for Payment model.
+ * VoucherController implements the CRUD actions for Voucher model.
  */
-class PaymentController extends Controller
+class VoucherController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +28,12 @@ class PaymentController extends Controller
     }
 
     /**
-     * Lists all Payment models.
+     * Lists all Voucher models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PaymentSearch();
+        $searchModel = new VoucherSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +43,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Displays a single Payment model.
+     * Displays a single Voucher model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +55,13 @@ class PaymentController extends Controller
     }
 
     /**
-     * Creates a new Payment model.
+     * Creates a new Voucher model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Payment();
+        $model = new Voucher();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +73,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Updates an existing Payment model.
+     * Updates an existing Voucher model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +92,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Deletes an existing Payment model.
+     * Deletes an existing Voucher model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,18 +105,37 @@ class PaymentController extends Controller
     }
 
     /**
-     * Finds the Payment model based on its primary key value.
+     * Finds the Voucher model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Payment the loaded model
+     * @return Voucher the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Payment::findOne($id)) !== null) {
+        if (($model = Voucher::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    //Display a users' vouchers
+    public function actionMyvouchers()
+    {
+        $this->layout = 'admin';
+        $query = Voucher::find()->where(['created_by' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
+        $vouchers = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('myvouchers', [
+            'vouchers' => $vouchers,
+            'pages' => $pages,
+
+        ]);
+
     }
 }

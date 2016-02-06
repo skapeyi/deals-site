@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\search\Order */
+/* @var $model frontend\models\search\Voucher */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="order-search">
+<div class="voucher-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'voucher_code') ?>
+    <?= $form->field($model, 'code') ?>
 
     <?= $form->field($model, 'deal_id') ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'redeemed') ?>
 
-    <?= $form->field($model, 'type') ?>
+    <?= $form->field($model, 'redeemed_date') ?>
 
-    <?php // echo $form->field($model, 'redeem_status') ?>
+    <?php // echo $form->field($model, 'payment_method') ?>
 
-    <?php // echo $form->field($model, 'feedback') ?>
+    <?php // echo $form->field($model, 'payment_id') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'deleted') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 
@@ -38,14 +38,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'created_by') ?>
 
     <?php // echo $form->field($model, 'updated_by') ?>
-
-    <?php // echo $form->field($model, 'quantity') ?>
-
-    <?php // echo $form->field($model, 'unit') ?>
-
-    <?php // echo $form->field($model, 'method') ?>
-
-    <?php // echo $form->field($model, 'payment_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

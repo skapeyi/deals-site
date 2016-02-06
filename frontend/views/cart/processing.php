@@ -8,11 +8,16 @@ use yii\bootstrap\ActiveForm;
  * Date: 10/27/2015
  * Time: 5:49 PM
  */
-$this->title = 'After posting | '.Yii::$app->name;
+$this->title = 'Payment | '.Yii::$app->name;
 ?>
 <div class="row">
-    <h3>Follow instructions below</h3>
 
+<h1>processing request</h1>
+
+    <div class="col-md-8 ">
+
+
+    </div>
 </div>
 
 

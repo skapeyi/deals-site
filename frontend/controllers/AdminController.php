@@ -93,6 +93,8 @@ class AdminController extends Controller {
      */
     public function actionGeneratevouchers($deal, $quantity)
     {
+        $this->layout = 'admin';
+
 
     }
 

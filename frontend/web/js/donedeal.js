@@ -66,14 +66,27 @@ $(document).ready(function(){
                 order.push(item)
             }
 
+            console.log(order);
+            alert(order);
+
             //go to the next page
             $.ajax({
-                url: 'checkout',
+                url: 'index',
+                contentType: 'application/json',
                 type: 'post',
                 data: order,
-                success: function(html){
-                    console.log(html);
+                error: function() {
+                    console.log('bitch please');;
+
+                },
+                success: function(data) {
+
+
+                    console.log('nigga please');
+
                 }
+
+
 
             });
 
@@ -88,10 +101,10 @@ $(document).ready(function(){
 function quantityselectionchanged(id,quantity){
     //calculate the total for the new item which the user has selected
     var cart_index = id.slice(-1);
-    var previous_item_total = document.getElementById('cartindextotal'+cart_index).textContent;
-    var unit_price = document.getElementById('cartindexprice'+cart_index).textContent;
+    var previous_item_total = document.getElementById('cartindextotal'+cart_index).value;
+    var unit_price = document.getElementById('cartindexprice'+cart_index).value;
     var new_item_price = quantity * unit_price;
-    document.getElementById('cartindextotal'+ cart_index).textContent = new_item_price;
+    document.getElementById('cartindextotal'+ cart_index).value = new_item_price;
 
     //update the new price
     var prev_total = document.getElementById('cart_total').textContent;

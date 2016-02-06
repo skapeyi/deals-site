@@ -4,11 +4,10 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Order;
-use frontend\models\search\OrderSearch;
+use frontend\models\search\Order as OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\Pagination;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -33,28 +32,12 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-//        $searchModel = new OrderSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-        $this -> layout = "admin";
-        $query = Order::find()->where(['status' => 10]);
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages,
-
-        ]);
-        return $this->render('index',[
-            'model'
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

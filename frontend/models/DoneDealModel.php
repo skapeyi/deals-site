@@ -23,4 +23,6 @@ class DoneDealModel extends \yii\db\ActiveRecord
             BlameableBehavior::className(),
         ];
     }
+
+
 }

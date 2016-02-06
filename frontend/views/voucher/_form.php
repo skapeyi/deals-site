@@ -4,27 +4,27 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Order */
+/* @var $model frontend\models\Voucher */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="order-form">
+<div class="voucher-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'voucher_code')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'deal_id')->textInput() ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'redeemed')->textInput() ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'redeemed_date')->textInput() ?>
 
-    <?= $form->field($model, 'redeem_status')->textInput() ?>
+    <?= $form->field($model, 'payment_method')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'feedback')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'payment_id')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'deleted')->textInput() ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 
@@ -33,14 +33,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'created_by')->textInput() ?>
 
     <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'quantity')->textInput() ?>
-
-    <?= $form->field($model, 'unit')->textInput() ?>
-
-    <?= $form->field($model, 'method')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'payment_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

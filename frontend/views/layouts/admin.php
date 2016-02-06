@@ -61,7 +61,7 @@ AppAsset::register($this);
                                 ]
                             ],
                             [
-                                'url' => ['user/voucher'],
+                                'url' => ['voucher/myvouchers'],
                                 'label' => 'My Vouchers',
                                 'icon' => 'tags'
                             ],
