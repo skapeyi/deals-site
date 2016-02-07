@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 use Faker\Provider\cs_CZ\DateTime;
+use frontend\models\Payment;
 use Yii;
 use frontend\models\Voucher;
 use frontend\models\search\OrderSearch;
@@ -23,10 +24,12 @@ use yii\db\Expression;
 
 class CartController extends Controller{
     //we need come constant here
-    const api_url = "https://www.yodime.com/Json_Api_Handler";
+
+    //const api_url = "https://www.yodime.com/Json_Api_Handler";
+    const api_url = "http://dev.yodime.com:8080/Json_Api_Handler";
     const api_username = "api_Triumworks";
     const api_password  = "8v4860tv4p0ivl77mhb6d7hkoo";
-    const email  = "developer@triumworks.com";
+    const api_email  = "developer@triumworks.com";
     //we also need the api method, but this will vary depending on the method being used..we can set this in the control statement
 
     public function behaviors()
@@ -104,8 +107,6 @@ class CartController extends Controller{
     }
 
 
-
-
     public function actionIndex(){
 
         // we need to redirect to this page and get the deals in the cart and display them
@@ -129,11 +130,12 @@ class CartController extends Controller{
             Yii::$app->session->setFlash("success",$params['paymentmethod']);
             //in params, we have our information..i.e the deals,qualities and prices..we now
             //we need to know the payment method selected
-            //Yii::info($params,'debug');
-            //Yii::info(count($params),'debug');
+
             //the posted data has form fields, but four of them are not items to create voucher for.. therefore, we subtract and get the actual items that we need to generate vouchers for.
 
-            $actual_items = (count($params) - 4)/4;
+            $actual_items = (count($params) - 5)/4;
+            Yii::info(count($params).' count parmas','debug');
+            Yii::info($actual_items.' actual items','debug');
             $deals = [];
             for ($x = 0; $x < $actual_items; $x++)
             {
@@ -169,6 +171,7 @@ class CartController extends Controller{
                         $voucher->payment_method = 'Pay on arrival';
                         $voucher->redeemed = 0;
                         $voucher->deleted = 0;
+                        $voucher->activation_status = 1;
 
                         $deal_expire_date = strtotime( substr($deal->end_date,0,10));
 
@@ -180,8 +183,6 @@ class CartController extends Controller{
                         {
                             //send the user a message and or email
                             Yii::$app->session->setFlash('success','Your deal is ready');
-
-
                         }
 
                         else
@@ -195,12 +196,104 @@ class CartController extends Controller{
                 }
 
             }
-            elseif($params['paymentmethod'] == 'Airtel Money')
+            elseif($params['paymentmethod'] == 'MTN MobileMoney')
             {
-                $method = "MTNPayment";
+                //we want to create the vouchers once the payment processor receives the payment
+                //or, we can create the vouchers here, but de-activate them...
+                $payment = new Payment();
+                $payment->phone = $params['phone'];
+                $payment->amount = $params['carttotal'];
+                $payment->created_by = Yii::$app->user->id;
+                $payment->updated_by = Yii::$app->user->id;
+
+                if($payment->save())
+                {
+                    $method = "MTNPayment";
+
+                    //
+                    $keys = array('api_method','email','api_username','api_password','transaction_amount','merchant_transaction_id','mtn_number');
+
+                    $values = array($method, self::api_email, self::api_username, self::api_password, $payment->amount, "donedeal_".strval($payment->id), $payment->phone );
+
+                    $post_array = array_combine($keys,$values);
+                    $json_obj = json_encode($post_array);
+                    Yii::info('The json string is '.$json_obj,'dev');
+
+                    //now we need to send the darn thing over to Yo Dime
+                    $curl = curl_init(self::api_url);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,
+                        array("Content-type: application/json"));
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $json_obj);
+
+
+                    Yii::info($json_obj,'debug');
+
+                    $yodime_response = curl_exec($curl);
+                    $yodime_status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                    if ( $yodime_status == 200 )
+                    {
+                        $response = json_decode($yodime_response,true);
+                        $payment->status = $response['transaction_status'];
+                        $payment->yodime_id = $response['yodime_transaction_id'];
+                        $payment->save();
+
+                        //then we go ahead and create the vouchers
+                        for($y=0; $y<$actual_items; $y++)
+                        {
+                            $quantity = $deals[$y]['quantity'];
+                            //the deal for which we are creating a voucher for.
+                            $deal = Deal::find($deals[$y]['deal_id'])->one();
+                            //Yii::info($deal->title,'debug');
+                            for ($z = 0; $z < $quantity; $z++)
+                            {
+                                $voucher = new Voucher();
+                                $voucher->created_by = Yii::$app->user->id;
+                                $voucher->updated_by = Yii::$app->user->id;
+                                $voucher->deal_id = $deals[$y]['deal_id'];
+                                $voucher->payment_method = 'MTN MobileMoney';
+                                $voucher->redeemed = 0;
+                                $voucher->deleted = 0;
+                                $voucher->activation_status = 0;
+                                $voucher->payment_id = $payment->id;
+
+                                $deal_expire_date = strtotime( substr($deal->end_date,0,10));
+
+                                $voucher->code = 'DoneDeal-'.date('dmy').'-'.CartController::randomString().'-'.CartController::randomString().'-' .date('dmy',$deal_expire_date);
+
+                                //donedeal-daymonthyear-xcvcxcvxcvxcv-daymonthyear
+
+                                if($voucher->save())
+                                {
+                                    //send the user a message and or email
+                                    Yii::$app->session->setFlash('success','Your deal is ready');
+                                }
+
+                                else
+                                {
+                                    Yii::$app->session->setFlash('error','Processing failed, please try again');
+                                }
+                            }
+
+
+
+                        }
+
+
+                    }
+
+
+
+                }
+
+
+
+
 
             }
-            elseif($params['paymentmethod'] == 'MTN MobileMoney')
+            elseif($params['paymentmethod'] == 'Airtel Money')
             {
                 $method = "AirtelPayment";
 

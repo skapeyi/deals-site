@@ -116,7 +116,8 @@ $this->title = 'Cart | '.Yii::$app->name;
                                 <tr>
                                     <td>
                                         <td colspan="2" class="" style="text-align: right;"><strong>Total UGX</strong></td>
-                                        <td class="currency" id="cart_total"><strong> <?= $cart_total ?></strong></td>
+                                        <td><input readonly class="currency" id="cart_total" name="carttotal" value=<?= $cart_total ?>></td>
+
                                     </td>
                                 </tr>
                             </tfoot>

@@ -12,23 +12,27 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'merchant_transaction_id')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'yodime_transaction_id')->textInput() ?>
-
-    <?= $form->field($model, 'amount')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'amount_received')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'received_status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'created_at')->textInput() ?>
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
+
+    <?= $form->field($model, 'created_by')->textInput() ?>
+
+    <?= $form->field($model, 'updated_by')->textInput() ?>
+
+    <?= $form->field($model, 'deleted')->textInput() ?>
+
+    <?= $form->field($model, 'completed')->textInput() ?>
+
+    <?= $form->field($model, 'amount')->textInput() ?>
+
+    <?= $form->field($model, 'date_completed')->textInput() ?>
+
+    <?= $form->field($model, 'yodime_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'merchant_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

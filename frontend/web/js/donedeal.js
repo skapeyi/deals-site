@@ -114,7 +114,7 @@ function quantityselectionchanged(id,quantity){
 
     var new_total = prev_total - previous_item_total + new_item_price;
     console.log(new_total);
-    document.getElementById('cart_total').textContent = new_total;
+    document.getElementById('cart_total').value = new_total;
 }
 
 // we need to read the data from the cart page and post it to a controller that is going to then create the orders and

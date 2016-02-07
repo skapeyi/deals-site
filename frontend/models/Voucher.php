@@ -11,6 +11,7 @@ use Yii;
  * @property string $code
  * @property integer $deal_id
  * @property integer $redeemed
+ * @property integer $activation_status
  * @property integer $redeemed_date
  * @property string $payment_method
  * @property integer $payment_id
@@ -41,7 +42,7 @@ class Voucher extends DoneDealModel
     public function rules()
     {
         return [
-            [['deal_id', 'redeemed', 'redeemed_date', 'payment_id', 'deleted', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['deal_id', 'redeemed','activation_status', 'redeemed_date', 'payment_id', 'deleted', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
            // [['created_at', 'updated_at'], 'required'],
             [['code', 'payment_method'], 'string', 'max' => 255]
         ];
@@ -57,6 +58,7 @@ class Voucher extends DoneDealModel
             'code' => 'Code',
             'deal_id' => 'Deal ID',
             'redeemed' => 'Redeemed',
+            'activation_status' => 'Activated',
             'redeemed_date' => 'Redeemed Date',
             'payment_method' => 'Payment Method',
             'payment_id' => 'Payment ID',

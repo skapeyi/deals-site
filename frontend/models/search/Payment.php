@@ -18,8 +18,8 @@ class Payment extends PaymentModel
     public function rules()
     {
         return [
-            [['id', 'yodime_transaction_id', 'created_at', 'updated_at'], 'integer'],
-            [['merchant_transaction_id', 'amount', 'status', 'amount_received', 'received_status', 'phone'], 'safe'],
+            [['id', 'created_at', 'updated_at', 'created_by', 'updated_by', 'deleted', 'completed', 'amount', 'date_completed'], 'integer'],
+            [['yodime_id', 'merchant_id', 'status'], 'safe'],
         ];
     }
 
@@ -57,17 +57,19 @@ class Payment extends PaymentModel
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'yodime_transaction_id' => $this->yodime_transaction_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'deleted' => $this->deleted,
+            'completed' => $this->completed,
+            'amount' => $this->amount,
+            'date_completed' => $this->date_completed,
         ]);
 
-        $query->andFilterWhere(['like', 'merchant_transaction_id', $this->merchant_transaction_id])
-            ->andFilterWhere(['like', 'amount', $this->amount])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'amount_received', $this->amount_received])
-            ->andFilterWhere(['like', 'received_status', $this->received_status])
-            ->andFilterWhere(['like', 'phone', $this->phone]);
+        $query->andFilterWhere(['like', 'yodime_id', $this->yodime_id])
+            ->andFilterWhere(['like', 'merchant_id', $this->merchant_id])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

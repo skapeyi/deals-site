@@ -56,7 +56,7 @@ AppAsset::register($this);
                                     ['label' => "Deal Locations", 'icon' => 'pushpin', 'url' => ['location/index']],
                                     ['label' => "Merchants", 'icon' => 'eye-open', 'url' => ['admin/merchant']],
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
-                                    ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['order/index']],
+                                    ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['voucher/index']],
                                     ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/index']],
                                 ]
                             ],

@@ -17,23 +17,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'merchant_transaction_id') ?>
+    <?= $form->field($model, 'created_at') ?>
 
-    <?= $form->field($model, 'yodime_transaction_id') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
-    <?= $form->field($model, 'amount') ?>
+    <?= $form->field($model, 'created_by') ?>
 
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'updated_by') ?>
 
-    <?php // echo $form->field($model, 'amount_received') ?>
+    <?php // echo $form->field($model, 'deleted') ?>
 
-    <?php // echo $form->field($model, 'received_status') ?>
+    <?php // echo $form->field($model, 'completed') ?>
 
-    <?php // echo $form->field($model, 'phone') ?>
+    <?php // echo $form->field($model, 'amount') ?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'date_completed') ?>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'yodime_id') ?>
+
+    <?php // echo $form->field($model, 'merchant_id') ?>
+
+    <?php // echo $form->field($model, 'status') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
