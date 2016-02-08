@@ -57,6 +57,7 @@ AppAsset::register($this);
                                     ['label' => "Merchants", 'icon' => 'eye-open', 'url' => ['admin/merchant']],
                                     ['label' => "Users", 'icon' => 'wrench', 'url' => ['admin/index']],
                                     ['label' => "Vouchers", 'icon' => 'gift', 'url' => ['voucher/index']],
+                                    ['label' => "All payments", 'icon' => 'money', 'url' => ['payment/index']],
                                     ['label' => "Reports", 'icon' => 'globe', 'url' => ['report/index']],
                                 ]
                             ],
@@ -65,11 +66,11 @@ AppAsset::register($this);
                                 'label' => 'My Vouchers',
                                 'icon' => 'tags'
                             ],
-//                            [
-//                                'url' => ['user/credit'],
-//                                'label' => 'Credits',
-//                                'icon' => 'gift'
-//                            ],
+                            [
+                                'url' => ['payment/mypayments'],
+                                'label' => 'My payments',
+                                'icon' => 'gift'
+                            ],
                             [
                                 'url' => ['user/password'],
                                 'label' => 'Change Password',

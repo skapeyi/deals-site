@@ -107,7 +107,7 @@ function quantityselectionchanged(id,quantity){
     document.getElementById('cartindextotal'+ cart_index).value = new_item_price;
 
     //update the new price
-    var prev_total = document.getElementById('cart_total').textContent;
+    var prev_total = document.getElementById('cart_total').value;
     //console.log(previous_item_total+" previous item total")
     //console.log(prev_total+ " previous cart total");
     //console.log(total_price + "  total item cost");

@@ -8,6 +8,7 @@ use frontend\models\search\Payment as PaymentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * PaymentController implements the CRUD actions for Payment model.
@@ -32,12 +33,18 @@ class PaymentController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PaymentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $this->layout = 'admin';
+        $query = Payment::find()->orderBy(['id' => SORT_DESC]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
+        $payments = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        return $this->render('mypayments', [
+            'payments' => $payments,
+            'pages' => $pages,
+
         ]);
     }
 
@@ -117,5 +124,23 @@ class PaymentController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionMypayments()
+    {
+        $this->layout = 'admin';
+        $query = Payment::find()->where(['created_by' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'defaultPageSize' => 10]);
+        $payments = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('mypayments', [
+            'payments' => $payments,
+            'pages' => $pages,
+
+        ]);
+
     }
 }
