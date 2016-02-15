@@ -45,8 +45,12 @@ AppAsset::register($this);
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] =  ['label' => Icon::show('shopping-cart').' Cart', 'url' => ['/cart/index']];
-                $menuItems[] =  Html::button(Icon::show('sign-in').'Login',['value' => Url::to(['/site/login']),'class'=>'btn btn-primary btn-sm','id' => 'signinmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
-                $menuItems[] = Html::button(Icon::show('user').'Register',['value' => Url::to(['/site/signup']),'class'=>'btn btn-primary btn-sm','id' => 'signupmodalButton','data-toggle' =>'tooltip','title' => 'Login' ]);
+
+                $menuItems[] =  ['label' => Icon::show('sign-in').' Login', 'url' => ['/site/login']];
+
+                $menuItems[] =  ['label' => Icon::show('pencil').' Register', 'url' => ['/site/signup']];
+
+
             }
             else
             {
@@ -55,7 +59,7 @@ AppAsset::register($this);
                 $menuItems[] = [
                     'label' => Icon::show('sign-out').' Logout (' . Yii::$app->user->identity->email . ')',
                     'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
+                    'linkOptions' => ['data-method' => 'post', 'class' => '']
                 ];
             }
             echo Nav::widget([

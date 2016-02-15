@@ -7,6 +7,8 @@ use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 use kartik\sidenav\SideNav;
 use yii\bootstrap\Modal;
+use kartik\icons\Icon;
+Icon::map($this);
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -27,15 +29,57 @@ AppAsset::register($this);
 
 <body>
     <?php $this->beginBody() ?>
+    <div class="wrap">
+        <?php
+        NavBar::begin([
+            'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-default navbar-fixed-top ',
+                'id' => 'logo-nav',
+            ],
+        ]);
+        $menuItems = [
+
+        ];
+        if (Yii::$app->user->isGuest) {
+            $menuItems[] =  ['label' => Icon::show('shopping-cart').' Cart', 'url' => ['/cart/index']];
+
+            $menuItems[] =  ['label' => Icon::show('sign-in').' Login', 'url' => ['/site/login']];
+
+            $menuItems[] =  ['label' => Icon::show('pencil').' Register', 'url' => ['/site/signup']];
+        }
+        else
+        {
+            $menuItems[] =  ['label' => Icon::show('shopping-cart').' Cart', 'url' => ['/cart/index']];
+
+            $menuItems[] = ['label' => Icon::show('user').'Account', 'url' => ['/user/dashboard']];
+
+            $menuItems[] = [
+                'label' => Icon::show('sign-out').' Logout (' . Yii::$app->user->identity->email . ')',
+                'url' => ['/site/logout'],
+                'linkOptions' => ['data-method' => 'post', 'class' => '']
+            ];
+        }
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'encodeLabels' => false,
+            'items' => $menuItems,
+        ]);
+
+        NavBar::end();
+        ?>
+    </div>
+
     <div class="">
-        <div class="container-fluid">
+        <div class="container" id="page-container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <!--Create a row and a sidebar here -->
             <div  class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <?php echo SideNav::widget([
                         'type' => SideNav::TYPE_DEFAULT,
                         'heading' => 'My Account',
@@ -91,7 +135,7 @@ AppAsset::register($this);
                     ]); ?>
 
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <?= $content ?>
                 </div>
             </div>
