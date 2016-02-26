@@ -26,9 +26,9 @@ class CartController extends Controller{
     //we need come constant here
 
     //const api_url = "https://www.yodime.com/Json_Api_Handler";
-    const api_url = "http://dev.yodime.com:8080/Json_Api_Handler";
+    const api_url = "https://www.yodime.com/Json_Api_Handler";
     const api_username = "api_Triumworks";
-    const api_password  = "8v4860tv4p0ivl77mhb6d7hkoo";
+    const api_password  = "66gu3hrb8kgfp8jbediqbgcvo5";
     const api_email  = "developer@triumworks.com";
     //we also need the api method, but this will vary depending on the method being used..we can set this in the control statement
 
