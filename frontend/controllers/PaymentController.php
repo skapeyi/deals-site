@@ -143,4 +143,15 @@ class PaymentController extends Controller
         ]);
 
     }
+
+    public function actionIpn(){
+        $post = file_get_contents("php://input");
+        //decode json post input as php array:
+        $data = json_decode($post, true);
+        Yii::info('received json'.$data,'debug');
+
+        $request = Yii::$app->request->getBodyParams();
+        Yii::info('Data from body params'.$request,'debug');
+
+    }
 }
