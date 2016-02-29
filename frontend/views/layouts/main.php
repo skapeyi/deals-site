@@ -155,9 +155,54 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; DoneDeal <?= date('Y') ?></p>
-        <p class="pull-right">The Best Deals In Town </p>
+            <div class="col-md-3">
+                <?= Html::a(Html::img('@web/images/logo_400x400.png', ['alt'=>Yii::$app->name]), ['site/index']) ?>
+            </div>
+            <div class="col-md-3">
+                <h3>What is DoneDeal?</h3>
+                <p class="center-justified">
+                    Done Deal offers the best deals on services in
+                    Uganda. Done Deal gives you an opportunity
+                    to try out new experiences to a greatly
+                    discounted price. Discover new restaurants,
+                    spoil yourself with a spa treatment or surprise
+                    your beloved one with a romantic getaway, all
+                    in a simple and secure way.
+                </p>
+            </div>
+            <div class="col-md-3  center-justified">
+                <h3>Payment methods</h3>
+                <?= Html::a(Html::img('@web/images/mmoney.png', ['alt'=>"Mtn MobileMoney"])) ?>
+                <p></p>
+                <?= Html::a(Html::img('@web/images/airtelmoney.png', ['alt'=>"Airtel Money"])) ?>
+
+            </div>
+
+            <div class="col-md-3">
+                <h3>Explore</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"><?= Html::a(' Term & conditions', ['site/terms']) ?> </li>
+                    <li class="list-group-item"><?= Html::a(' Privacy', ['site/privacy']) ?> </li>
+                    <li class="list-group-item"><?= Html::a(' Merchant registration', ['site/signup']) ?> </li>
+                    <li class="list-group-item"><?= Html::a(' How it works', ['site/howitworks']) ?> </li>
+                </ul>
+
+            </div>
+
         </div>
+        <div class="container-fluid">
+           <div class="row">
+
+               <p id="footer-p">&copy; 2016 - DoneDeal &nbsp;  <?= Icon::show('mobile').'
+0200 905030'?>&nbsp; <?= Icon::show('envelope').'help@donedeal.ug'?>
+                   <a class="btn btn-social-icon btn-facebook" href="https://www.facebook.com/profile.php?id=100009333363843&fref=ts" target="_blank"><span class="fa fa-facebook purple"></span></a>
+
+                   <a href="https://twitter.com/DoneDealUg" target="_blank" class="btn btn-social-icon btn-lg btn-twitter"><i class="fa fa-twitter purple"></i></a>
+
+                   <a target="_blank" href="https://www.instagram.com/donedealug/" class="btn btn-social-icon btn-lg btn-instagram"><i class="fa fa-instagram purple"></i></a> </p>
+           </div>
+
+        </div><!-- /.container-fluid -->
     </footer>
     <?php
     Modal::begin([

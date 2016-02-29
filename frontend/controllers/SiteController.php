@@ -303,6 +303,18 @@ class SiteController extends Controller
         return $this->render('voucher');
     }
 
+    public function actionTerms(){
+        return $this->render('terms');
+    }
+
+    public function actionHowitworks(){
+        return $this->render('howitworks');
+    }
+
+    public function actionPrivacy(){
+        return $this->render('privacy');
+    }
+
 
 
 
