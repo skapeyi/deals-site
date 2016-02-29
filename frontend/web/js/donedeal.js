@@ -5,6 +5,7 @@
 
 $(document).ready(function(){
 
+
 //    the modal for adding a new category on category/index
     $('#addCategorymodalButton').click(function(){
         $('#addCategoryModal').modal('show')

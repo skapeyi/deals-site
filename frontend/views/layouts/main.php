@@ -30,58 +30,128 @@ AppAsset::register($this);
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]),
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-default navbar-fixed-top ',
-                    'id' => 'logo-nav',
-                ],
-            ]);
-            $menuItems = [
+    <nav class="navbar navbar-default navbar-fixed-top" id="main-nav" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle hamburger hamburger-close collapsed" data-target="#example-navbar-default-collapse" data-toggle="collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="hamburger-bar"></span>
+                </button>
+                <button type="button" class="navbar-toggle collapsed" data-target="#example-navbar-default-search" data-toggle="collapse">
+                    <span class="sr-only">Toggle Search</span>
+                    <i class="icon wb-search" aria-hidden="true"></i>
+                </button>
 
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] =  ['label' => Icon::show('shopping-cart').' Cart', 'url' => ['/cart/index']];
+                <?= Html::a(Html::img('@web/images/header_logo.png', ['alt'=>Yii::$app->name]), ['site/index']) ?>
 
-                $menuItems[] =  ['label' => Icon::show('sign-in').' Login', 'url' => ['/site/login']];
+            </div> <!--Navbar-header-->
 
-                $menuItems[] =  ['label' => Icon::show('pencil').' Register', 'url' => ['/site/signup']];
+            <div class="collapse navbar-collapse navbar-collapse-group" id="example-navbar-default-collapse">
+                <ul class="nav navbar-toolbar navbar-left navbar-toolbar-left">
+                    <li class="navbar-list">
+                        <p class="navbar-text" id="phoneandemail"> <?= Icon::show('mobile').'
+0200 905030 <br/>' ?> <?= Icon::show('envelope').'help@donedeal.ug <br/>'?></p>
+
+                    </li>
+                    <li class="hidden-float navbar-list">
+                        <a class="glyphicon glyphicon-search " data-toggle="collapse" href="#example-navbar-default-search" role="button">
+                            <span class="sr-only">Toggle Search</span>
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+                    <?php if(Yii::$app->user->isGuest) :?>
+                        <li class="navbar-list">
+                            <?= Html::a(Icon::show('facebook'), ['site/auth','authclient' =>'facebook']) ?>
+                        </li>
+                        <li class="navbar-list">
+                            <?= Html::a(Icon::show('sign-in').'Login', ['site/login']) ?>
+                        </li>
+                        <li class="navbar-list">
+                            <?= Html::a(Icon::show('pencil').'Sign-up', ['site/signup']) ?>
+                        </li>
+                        <li class="navbar-list">
+                            <?= Html::a(Icon::show('shopping-cart').'Cart', ['cart/index']) ?>
+                        </li>
+                    <?php else : ?>
+                        <li class="navbar-list">
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+                               role="button">Account <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><?= Html::a(Icon::show('user').'Account', ['user/dashboard']) ?></li>
+                                <li class="divider" role="presentation"></li>
+                                <li><?= Html::a(Icon::show('sign-out').'Logout', ['site/logout'],['data-method' => 'post']) ?></li>
+                            </ul>
+                        </li>
 
 
-            }
-            else
-            {
-                $menuItems[] =  ['label' => Icon::show('shopping-cart').' Cart', 'url' => ['/cart/index']];
-                $menuItems[] = ['label' => Icon::show('user').'Account', 'url' => ['/user/dashboard']];
-                $menuItems[] = [
-                    'label' => Icon::show('sign-out').' Logout (' . Yii::$app->user->identity->email . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post', 'class' => '']
-                ];
-            }
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'encodeLabels' => false,
-                'items' => $menuItems,
-            ]);
+
+                        <li class="navbar-list">
+                            <?= Html::a(Icon::show('shopping-cart').'Cart', ['cart/index']) ?>
+                        </li>
+                    <?php endif?>
 
 
-            NavBar::end();
-        ?>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-search-overlap" id="example-navbar-default-search">
+                <form lpformnum="14" role="search">
+                    <div class="form-group">
+                        <div class="input-search">
+                            <i class="input-search-icon wb-search" aria-hidden="true"></i>
+                            <input class="form-control" name="site-search" placeholder="Search..." type="text">
+                            <button type="button" class="input-search-close icon wb-close" data-target="#example-navbar-default-search" data-toggle="collapse" aria-label="Close">
+
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div><!--collapse navbar-search-overlap-->
+        </div><!--Container fluid-->
+
+
+    </nav>
+
+
+    <div class="container">
+        <nav class="navbar navbar-inverse" id="categories-nav" role="navigation">
+            <div class="container-fluid" id="icons-menu">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="javascript:void(0)">Beauty experience</a></li>
+                    <li><a href="javascript:void(0)">Food and drinks</a></li>
+                    <li><a href="javascript:void(0)">Events and activities</a></li>
+                    <li><a href="javascript:void(0)">Fitness and health</a></li>
+                    <li><a href="javascript:void(0)">Hair treatment</a></li>
+
+                </ul>
 
 
 
-        <div class="container" id="page-container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-        </div>
+
+            </div><!--Container fluid-->
+
+
+        </nav><!--the nav at the top-->
     </div>
+
+
+
+    <div class="wrap">
+        <div class="container" id="page-container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div> <!--page container-->
+    </div><!--wrap-->
 
     <footer class="footer">
         <div class="container">

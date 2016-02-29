@@ -44,8 +44,8 @@ class AppAsset extends AssetBundle
     ];
 
     public $js = [
-        //'js/jquery.js',
-        'js/bootstrap.js',
+
+        //'js/bootstrap.js',
         'js/jquery.animsition.js',
         'js/jquery-asScroll.js',
         'js/jquery.mousewheel.js',

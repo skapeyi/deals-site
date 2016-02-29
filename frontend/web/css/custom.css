@@ -1,3 +1,47 @@
 body{
     background-color: #F1F4F5;
 }
+.wrap{
+    margin-top: 20px;
+}
+#icons-menu{
+
+}
+
+.row.vertical-divider {
+    overflow: hidden;
+}
+.row.vertical-divider > div[class^="col-"] {
+    text-align: center;
+    /padding-bottom: 100px;
+    margin-bottom: -100px;
+    border-left: 3px solid #F2F7F9;
+    border-right: 3px solid #F2F7F9;
+}
+.row.vertical-divider div[class^="col-"]:first-child {
+    border-left: none;
+}
+.row.vertical-divider div[class^="col-"]:last-child {
+    border-right: none;
+}
+
+.navbar-list{
+    margin-left: 10px;
+    margin-right:10px;
+
+}
+
+#phoneandemail{
+    font-size: 12px;
+}
+#main-nav{
+    max-height: 20px;
+}
+
+#icons-menu{
+    min-height: 20px;
+    max-height: 20px;
+}
+#categories-nav{
+    max-height: 20px;
+}
