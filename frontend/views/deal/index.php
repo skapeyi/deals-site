@@ -49,9 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?php echo date('d-M-Y', strtotime($deal->start_date)); ?></td>
                     <td><?php echo date('d-M-Y', strtotime($deal->end_date)); ?></td>
                     <td>
-                        <a href="#" title="Deal Image" aria-label="View or update deal image" data-pjax="0"><span class="glyphicon glyphicon-camera"></span></a>
-                        <a href="#" title="Update Deal " aria-label="Update Deal" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#" title="Deal Statistics" aria-label="View deals statistics" data-pjax="0"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    <td>
+                        <?= Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $url = ['view','id' => $deal->id], $options = ['title' => 'view'] )?>
+                        <?= Html::a( '<span class="glyphicon glyphicon-pencil"></span>', $url = ['update','id' => $deal->id], $options = ['title' => 'updated'] )?>
+                        <?= Html::a( '<span class="glyphicon glyphicon-trash"></span>', $url = ['delete','id' => $deal->id], $options = ['title' => 'delete', 'data-method' => 'post'] )?>
+                    </td>
                     </td>
                 </tr>
             <?php  endforeach; ?>

@@ -37,7 +37,7 @@ class DealController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['create','index','image','view'],
+                        'actions' => ['create','index','image','view','update'],
                         'roles' => ['@'],
                     ],
 
@@ -85,8 +85,11 @@ class DealController extends Controller
     {
         $deal = Deal::findOne($id);
 
+        $sideDeals = (new \yii\db\Query())->select(['deal.id','title','deal.highlight as highlight','value','discount','img_url','location.name as location'])->from('deal')->where(['status' => 10]) ->limit(3)->leftJoin('location','deal.location_id = location.id')->all();
+
         return $this->render('view', [
             'deal' => $deal,
+            'sideDeals' => $sideDeals
         ]);
     }
 

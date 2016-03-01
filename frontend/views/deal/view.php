@@ -71,48 +71,25 @@ $this->title = $deal->title.' | DoneDeal';
     <!--    The side bar containing other deals should be from here-->
     <div class="col-md-3 deal-col-right">
         <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel default">
-                    <div class="panel-heading">More Deals</div>
-                    <div class="panel-body">
-                        <?php echo Html::img('@web/images/gym.png',['class'=>'deal_thumb']) ?>
-                        <h4 class="deal-title center-justified ">Gym Deal</h4>
-                        <h5 class="deal-price-left"><strong>UGX 1220000</strong></h5>
-                        <h6 class="deal-price-left">&nbsp;<strike>UGX 1250000</strike> </h6>
-                        <h5 class="deal-percentage-right"><strong>30%</strong></h5>
-                        <h6 class="deal-location-down"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Ntinda,Kampala</span></h6>
+            <?php foreach($sideDeals as $sideDeal) :?>
+                <?php Yii::info($sideDeal,'debug');?>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title sidedeal-title"><?=$sideDeal['title']?></h5>
+                        </div>
+                        <div class="panel-body sidedeal-body">
 
+                            <?php
+                            $split_url = explode(".",$sideDeal['img_url']);
+                            echo Html::img('@web/'.$split_url[0].'small.'.$split_url[1],['class' => 'big-deal-image'] );
+                            ?>
+                            <p><strong>UGX <?php echo $sideDeal['value']-(($deal['discount']/100)*$deal['value']) ?></strong> &nbsp;<strike>UGX <?php echo $sideDeal['value'];?></strike> <strong><?php echo $sideDeal['discount'];?>% </p>
+                            <h6> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"><?php echo $sideDeal['location']?></span></h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="panel panel default">
-
-                    <div class="panel-body">
-                        <?php echo Html::img('@web/images/gym.png',['class'=>'deal_thumb']) ?>
-                        <h4 class="deal-title center-justified ">Gym Deal</h4>
-                        <h5 class="deal-price-left"><strong>UGX 1220000</strong></h5>
-                        <h6 class="deal-price-left">&nbsp;<strike>UGX 1250000</strike> </h6>
-                        <h5 class="deal-percentage-right"><strong>30%</strong></h5>
-                        <h6 class="deal-location-down"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Ntinda,Kampala</span></h6>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="panel panel default">
-
-                    <div class="panel-body">
-                        <?php echo Html::img('@web/images/gym.png',['class'=>'deal_thumb']) ?>
-                        <h4 class="deal-title center-justified ">Gym Deal</h4>
-                        <h5 class="deal-price-left"><strong>UGX 1220000</strong></h5>
-                        <h6 class="deal-price-left">&nbsp;<strike>UGX 1250000</strike> </h6>
-                        <h5 class="deal-percentage-right"><strong>30%</strong></h5>
-                        <h6 class="deal-location-down"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Ntinda,Kampala</span></h6>
-
-                    </div>
-                </div>
-            </div>
+            <?php endforeach;?>
         </div>
     </div>
 </div>
