@@ -68,4 +68,4 @@ tests                    contains various tests for the advanced application
 ```
 Help?!!
 ------------------------
-If you need any assistance, please contact developer@donedeal.ug 
+If you need any assistance, please contact kapeyisamson@gmail.com 
